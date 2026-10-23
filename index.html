@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>대련 2박 3일</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: boarding-pass header, then one column of days; each day is a timeline of editable stop cards with links + photos at the foot. */
+:root{
+  --bg:#f3f5f6; --surface:#ffffff; --ink:#16232e; --muted:#5c6b76; --line:#d9e0e4;
+  --harbor:#1f4e6b; --lantern:#c8562b; --lantern-soft:#f7e3d8; --harbor-soft:#dde9f0;
+  --t-move:#6b7a86; --t-food:#b0611f; --t-massage:#7a4fa0; --t-night:#1f4e6b; --t-rest:#3f7d5a; --t-shop:#a33d5a;
+  --display:"Gowun Batang",ui-serif,"Apple SD Gothic Neo",serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f161c; --surface:#17212a; --ink:#e6edf1; --muted:#97a6b1; --line:#2a3743;
+  --harbor:#7fb3d3; --lantern:#ee8a5c; --lantern-soft:#3a2419; --harbor-soft:#1b2d3a;
+  --t-move:#9aa8b3; --t-food:#e0a066; --t-massage:#b897dc; --t-night:#7fb3d3; --t-rest:#7cc39b; --t-shop:#e08aa3;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f161c; --surface:#17212a; --ink:#e6edf1; --muted:#97a6b1; --line:#2a3743;
+  --harbor:#7fb3d3; --lantern:#ee8a5c; --lantern-soft:#3a2419; --harbor-soft:#1b2d3a;
+  --t-move:#9aa8b3; --t-food:#e0a066; --t-massage:#b897dc; --t-night:#7fb3d3; --t-rest:#7cc39b; --t-shop:#e08aa3;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 96px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2{font-family:var(--display);text-wrap:balance;margin:0;font-weight:700}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--lantern);outline-offset:2px}
+
+/* boarding pass */
+.pass{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pass-top{padding:20px 20px 16px;display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.pass h1{font-size:clamp(26px,6vw,36px);line-height:1.2}
+.pass-sub{color:var(--muted)}
+.legs{display:grid;grid-template-columns:1fr 1fr;border-top:1px dashed var(--line)}
+.leg{padding:14px 20px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.leg+.leg{border-left:1px dashed var(--line)}
+.leg .code{font-family:var(--mono);font-size:12px;color:var(--harbor)}
+.leg .route{font-weight:600}
+.leg .when{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.leg .delay{color:var(--lantern);font-size:12px}
+.stay{padding:12px 20px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+.stay b{color:var(--ink);font-weight:600}
+
+/* jump nav */
+.jump{display:flex;gap:8px;flex-wrap:wrap}
+.jump a{padding:6px 14px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:var(--ink);background:var(--surface);font-size:14px}
+.jump a:hover{border-color:var(--harbor)}
+
+/* day */
+.day{display:flex;flex-direction:column;gap:12px;scroll-margin-top:16px}
+.day-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.day-head h2{font-size:24px}
+.day-head .date{font-family:var(--mono);color:var(--muted);font-size:13px}
+.timeline{display:flex;flex-direction:column;gap:10px;position:relative;padding-left:0}
+
+.stop{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start}
+.stop-time{font-family:var(--mono);font-size:14px;color:var(--harbor);padding-top:14px;text-align:right;font-variant-numeric:tabular-nums;word-break:keep-all}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card-head{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.card-title{font-weight:600;font-size:16px;line-height:1.4;min-width:0;overflow-wrap:anywhere}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:1px 8px;border-radius:999px;border:1px solid currentColor;margin-right:6px;vertical-align:2px}
+.tag[data-t="이동"]{color:var(--t-move)} .tag[data-t="식사"]{color:var(--t-food)} .tag[data-t="마사지"]{color:var(--t-massage)}
+.tag[data-t="야경"]{color:var(--t-night)} .tag[data-t="휴식"]{color:var(--t-rest)} .tag[data-t="쇼핑"]{color:var(--t-shop)}
+.card-note{color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+.tools{display:flex;gap:4px;flex-shrink:0}
+.icon-btn{border:1px solid transparent;background:none;border-radius:8px;padding:2px 8px;font-size:13px;color:var(--muted)}
+.icon-btn:hover{border-color:var(--line);color:var(--ink)}
+.icon-btn.danger:hover{color:var(--lantern);border-color:var(--lantern)}
+
+/* attachments at the foot of each card */
+.foot{border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.links{display:flex;flex-direction:column;gap:4px}
+.link-row{display:flex;gap:6px;align-items:center;min-width:0}
+.link-row a{color:var(--harbor);text-decoration:none;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.link-row a:hover{text-decoration:underline}
+.link-row .n{font-size:11px;font-weight:700;color:#fff;background:#03c75a;border-radius:4px;padding:0 5px;flex-shrink:0}
+.link-row .n.g{background:#1a73e8}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.photo{position:relative;border-radius:8px;overflow:hidden;background:var(--harbor-soft);aspect-ratio:4/3;max-width:100%}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo button{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.55);color:#fff;border:0;border-radius:6px;font-size:12px;padding:1px 7px}
+.add-row{display:flex;gap:6px;flex-wrap:wrap}
+.chip-btn{border:1px dashed var(--line);background:none;border-radius:8px;padding:4px 10px;font-size:13px;color:var(--muted)}
+.chip-btn:hover{border-color:var(--harbor);color:var(--harbor)}
+
+/* forms */
+.form{display:flex;flex-direction:column;gap:8px}
+.form-row{display:flex;gap:8px;flex-wrap:wrap}
+.form label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px;flex:1;min-width:120px}
+.form input,.form textarea,.form select{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 10px;width:100%}
+.form textarea{min-height:64px;resize:vertical}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 14px;font-size:14px}
+.btn.primary{background:var(--harbor);border-color:var(--harbor);color:var(--surface)}
+.btn.warn{background:var(--lantern);border-color:var(--lantern);color:#fff}
+.confirm{background:var(--lantern-soft);border-radius:8px;padding:8px 10px;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:14px}
+.add-stop{align-self:flex-start;margin-left:76px}
+
+/* references section */
+.refs{display:flex;flex-direction:column;gap:12px}
+.refs h2{font-size:22px}
+.refs .card{gap:10px}
+
+/* save bar */
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ink);color:var(--bg);
+  padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:14px}
+.savebar .btn{background:var(--lantern);border-color:var(--lantern);color:#fff}
+.savebar .btn.ghost{background:none;color:var(--bg);border-color:var(--muted)}
+.status{font-size:13px;color:var(--muted);text-align:center}
+@media (max-width:480px){
+  .stop{grid-template-columns:48px 1fr;gap:8px}
+  .stop-time{font-size:13px}
+  .add-stop{margin-left:56px}
+  .legs{grid-template-columns:1fr}
+  .leg+.leg{border-left:0;border-top:1px dashed var(--line)}
+}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}}
+
+/* edit-mode / token panel */
+.modebar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.modebar .pill{display:inline-flex;align-items:center;gap:6px}
+.modebar .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.modebar .dot.on{background:var(--t-rest)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.panel ol{margin:0;padding-left:20px;color:var(--muted);font-size:13px;display:flex;flex-direction:column;gap:2px}
+.panel code{font-family:var(--mono);font-size:12px;background:var(--bg);padding:0 4px;border-radius:4px}
+.err{color:var(--lantern)}
+</style>
+</head>
+<body>
+<main id="app"><p style="text-align:center;color:#888">불러오는 중…</p></main>
+<script type="application/json" id="fallback">{"trip": {"title": "대련 2박 3일", "sub": "11월 20일 금 – 11월 22일 일 · 하루 한 번 마사지, 저녁엔 야경", "stay": "노보텔 대련 중산광장 · 长江路 28号 · 중산광장 도보 3분"}, "flights": [{"code": "CZ686", "route": "인천 T1 → 대련 주수이쯔", "when": "11/20 11:20 → 11:40", "delay": ""}, {"code": "CZ675", "route": "대련 주수이쯔 → 인천 T1", "when": "11/22 19:30 → 21:55", "delay": "지연: 원래 19:20 → 21:40"}], "days": [{"id": "d1", "label": "1일차", "date": "11/20 금", "items": [{"id": "a1", "time": "11:40", "tag": "이동", "title": "대련 저우수이쯔 공항 도착", "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분", "links": [], "photos": []}, {"id": "a2", "time": "13:00", "tag": "휴식", "title": "노보텔 대련 중산 체크인", "note": "짐 풀고 잠깐 쉬기 (체크인 12시부터)", "links": [], "photos": []}, {"id": "a3", "time": "13:30", "tag": "식사", "title": "시딩(喜鼎) 점심", "note": "파빌리온 근처 지점. 성게만두 필수. 지도앱에서 喜鼎 검색", "links": [], "photos": []}, {"id": "a4", "time": "14:30", "tag": "쇼핑", "title": "파빌리온(柏威年) 구경 + 카페", "note": "팝마트·지하 마트 구경, 카페에서 느긋하게 앉아 있기", "links": [], "photos": []}, {"id": "a5", "time": "16:30", "tag": "마사지", "title": "마사지 ①", "note": "호텔·파빌리온 근처 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색", "links": [], "photos": []}, {"id": "a6", "time": "19:00", "tag": "야경", "title": "동방수성 야경 + 저녁", "note": "택시 약 10분. 조명 켜진 운하 산책 후 운하뷰 식당", "links": [], "photos": []}, {"id": "a7", "time": "21:30", "tag": "야경", "title": "중산광장 야경 → 호텔", "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물", "links": [], "photos": []}]}, {"id": "d2", "label": "2일차", "date": "11/21 토", "items": [{"id": "b1", "time": "오전", "tag": "휴식", "title": "늦잠 + 호텔 조식", "note": "첫날 이동이 많았으니 여유 있게", "links": [], "photos": []}, {"id": "b2", "time": "11:00", "tag": "휴식", "title": "동관지에(东关街) · 대련의 성수", "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟", "links": [], "photos": []}, {"id": "b3", "time": "14:00", "tag": "마사지", "title": "마사지 ②", "note": "동관지에 근처 or 호텔 복귀 후 근처", "links": [], "photos": []}, {"id": "b4", "time": "16:00", "tag": "야경", "title": "연화산 전망대 일몰·야경", "note": "성해만대교와 시내가 한눈에. 오후 4시 조금 넘으면 해가 지니 늦지 않게", "links": [], "photos": []}, {"id": "b5", "time": "17:30", "tag": "야경", "title": "성해광장 야경", "note": "불 켜진 성해만대교 앞 산책. 바닷바람 강하니 따뜻하게", "links": [], "photos": []}, {"id": "b6", "time": "18:30", "tag": "식사", "title": "서안로 야시장 저녁", "note": "실내형이라 추워도 OK. 양꼬치·철판오징어·카오렁멘. 알리페이 준비", "links": [], "photos": []}, {"id": "b7", "time": "21:00", "tag": "이동", "title": "택시로 호텔 복귀", "note": "", "links": [], "photos": []}]}, {"id": "d3", "label": "3일차", "date": "11/22 일", "items": [{"id": "c1", "time": "10:00", "tag": "휴식", "title": "체크아웃 전까지 휴식", "note": "체크아웃 12시, 짐은 프런트에 맡기기", "links": [], "photos": []}, {"id": "c2", "time": "12:00", "tag": "식사", "title": "점심 + 카페", "note": "호텔·중산광장 근처에서 느긋하게", "links": [], "photos": []}, {"id": "c3", "time": "14:00", "tag": "마사지", "title": "마사지 ③", "note": "비행 전 90분 길게 받고 개운하게", "links": [], "photos": []}, {"id": "c4", "time": "15:45", "tag": "쇼핑", "title": "파빌리온 지하 마트", "note": "간식·기념품 쇼핑 (호텔에서 가까움)", "links": [], "photos": []}, {"id": "c5", "time": "16:45", "tag": "이동", "title": "호텔에서 짐 찾아 공항으로", "note": "택시 약 15~20분", "links": [], "photos": []}, {"id": "c6", "time": "19:30", "tag": "이동", "title": "CZ675 출발 (지연된 시간)", "note": "인천 21:55 도착. 당일 오전 앱에서 지연 재확인", "links": [], "photos": []}]}], "refs": {"links": [{"label": "참고 블로그 1 · skgus_13", "url": "https://blog.naver.com/skgus_13/224403484998"}, {"label": "참고 블로그 2 · skgus_13", "url": "https://blog.naver.com/skgus_13/224400851162"}, {"label": "참고 블로그 3 · borikong228", "url": "https://blog.naver.com/borikong228/224375333881"}, {"label": "참고 블로그 4 · jeehanna", "url": "https://blog.naver.com/jeehanna/224278645905"}, {"label": "참고 블로그 5 · wnllog", "url": "https://blog.naver.com/wnllog/224424067219"}, {"label": "참고 블로그 6 · i_cherryberry", "url": "https://blog.naver.com/i_cherryberry/224435318202"}], "photos": []}}</script>
+<script>
+(function(){
+  /* ── 저장소 설정 ── github.io 주소에서 자동으로 읽고, 아니면 아래 값을 씁니다 */
+  var OWNER="gus-wn", REPO="travel_dalian", BRANCH="main", FILE="data.json";
+  if(/\.github\.io$/.test(location.hostname)){
+    OWNER=location.hostname.split(".")[0];
+    var seg=location.pathname.split("/").filter(Boolean)[0];
+    if(seg && !/\.html?$/.test(seg)) REPO=seg;
+  }
+  var API="https://api.github.com/repos/"+OWNER+"/"+REPO+"/contents/";
+  var TK="dalian-gh-token", LS="dalian-gh-draft";
+
+  var TAGS=["이동","식사","마사지","야경","휴식","쇼핑"];
+  var saved=null, state=null, sha=null, token=null, dirty=false, saving=false, msg="", errMsg="";
+  var ui={edit:null,confirm:null,addLink:null,linkKind:"web",panel:false};
+  var localImg={}; /* 방금 올린 사진: GitHub Pages가 갱신되기 전까지 화면에 바로 보이게 */
+  try{token=localStorage.getItem(TK);}catch(e){}
+
+  var $app=document.getElementById("app");
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function uid(){return Math.random().toString(36).slice(2,9);}
+  function clone(o){return JSON.parse(JSON.stringify(o));}
+  function safeUrl(u){try{var x=new URL(u);return /^https?:$/.test(x.protocol)?x.href:"";}catch(e){return "";}}
+  function isNaver(u){return /naver\.(com|me)/.test(u);}
+  function host(u){try{return new URL(u).hostname;}catch(e){return "";}}
+  function isMap(l){return l.kind==="map"||/(^|\.)amap\.com$|gaode\.com$/.test(host(l.url));}
+  function sortKey(t){var m=/^(\d{1,2}):(\d{2})/.exec(t||"");if(m)return +m[1]*60+ +m[2];if(/오전|아침/.test(t))return 540;if(/오후|점심/.test(t))return 780;if(/저녁|밤/.test(t))return 1140;return 1500;}
+  function findItem(id){for(var i=0;i<state.days.length;i++){var d=state.days[i];for(var j=0;j<d.items.length;j++)if(d.items[j].id===id)return {d:d,it:d.items[j]};}return null;}
+  function target(id){if(id==="refs")return state.refs;var f=findItem(id);return f&&f.it;}
+  function canEdit(){return !!token;}
+  function imgSrc(p){return localImg[p.path]||p.path||p.url;}
+
+  /* ── base64 (한글 포함) ── */
+  function b64enc(str){var b=new TextEncoder().encode(str),s="";for(var i=0;i<b.length;i+=0x8000)s+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));return btoa(s);}
+  function b64dec(b64){var bin=atob(b64.replace(/\n/g,"")),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);}
+
+  function gh(path,opts){
+    opts=opts||{};var h={"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
+    if(token)h.Authorization="Bearer "+token;
+    if(opts.body)h["Content-Type"]="application/json";
+    return fetch(API+path+(opts.method?"":"?ref="+BRANCH+"&t="+Date.now()),{method:opts.method||"GET",headers:h,body:opts.body,cache:"no-store"});
+  }
+
+  /* ── 불러오기 ── 편집 모드면 GitHub API로 최신본, 아니면 사이트의 data.json */
+  async function load(){
+    var data=null;
+    if(token){
+      try{var r=await gh(FILE);
+        if(r.ok){var j=await r.json();data=JSON.parse(b64dec(j.content));sha=j.sha;}
+        else if(r.status===401){errMsg="저장 키가 맞지 않거나 만료됐어요. 편집 모드를 끄고 새 키를 넣어 주세요.";}
+        else if(r.status===404){errMsg="저장소 "+OWNER+"/"+REPO+"에서 data.json을 찾지 못했어요. 키를 만들 때 이 저장소를 골랐는지 확인해 주세요.";}
+      }catch(e){errMsg="GitHub에 연결하지 못했어요. 인터넷 연결을 확인해 주세요.";}
+    }
+    if(!data){try{var r2=await fetch(FILE+"?t="+Date.now(),{cache:"no-store"});if(r2.ok)data=await r2.json();}catch(e){}}
+    if(!data)data=JSON.parse(document.getElementById("fallback").textContent);
+    saved=data;state=clone(saved);
+    try{var d=localStorage.getItem(LS);if(d){var p=JSON.parse(d);if(p&&p.base===JSON.stringify(saved)){state=p.state;dirty=true;}}}catch(e){}
+    render();
+  }
+  function markDirty(){dirty=true;try{localStorage.setItem(LS,JSON.stringify({base:JSON.stringify(saved),state:state}));}catch(e){}render();}
+  function clearDraft(){try{localStorage.removeItem(LS);}catch(e){}}
+
+  /* ── 화면 ── */
+  function linksHTML(owner,pairs){
+    return pairs.map(function(p){var l=p[0],i=p[1];
+      return '<div class="link-row">'+(isMap(l)?'<span class="n g">고덕</span>':isNaver(l.url)?'<span class="n">N</span>':'')+
+        '<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.label||l.url)+'</a>'+
+        (canEdit()?'<button class="icon-btn danger" data-act="del-link" data-id="'+owner+'" data-i="'+i+'" aria-label="링크 삭제">삭제</button>':'')+'</div>';}).join("");
+  }
+  function photosHTML(owner,photos){
+    return photos.map(function(p,i){return '<div class="photo"><a href="'+esc(imgSrc(p))+'" target="_blank" rel="noopener"><img src="'+esc(imgSrc(p))+'" alt="'+esc(p.cap||"여행 사진")+'" loading="lazy"></a>'+
+      (canEdit()?'<button data-act="del-photo" data-id="'+owner+'" data-i="'+i+'" aria-label="사진 삭제">✕</button>':'')+'</div>';}).join("");
+  }
+  function footHTML(owner,obj){
+    var all=obj.links.map(function(l,i){return [l,i];});
+    var maps=all.filter(function(p){return isMap(p[0]);}), others=all.filter(function(p){return !isMap(p[0]);});
+    var addLink="";
+    if(ui.addLink===owner){var g=ui.linkKind==="map";
+      addLink='<form class="form" data-form="link" data-id="'+owner+'" data-kind="'+(g?"map":"web")+'">'+
+        '<div class="form-row"><label>'+(g?"고덕지도 링크":"링크 주소")+'<input id="ln-url-'+owner+'" name="url" type="text" inputmode="url" placeholder="'+(g?"https://surl.amap.com/...":"https://blog.naver.com/...")+'" required></label>'+
+        '<label>이름 (선택)<input id="ln-label-'+owner+'" name="label" placeholder="'+(g?"예: 시딩 파빌리온점":"예: 시딩 후기")+'"></label></div>'+
+        '<div class="form-actions"><button type="button" class="btn" data-act="cancel">취소</button><button class="btn primary">링크 추가</button></div></form>';}
+    var adds=canEdit()?'<div class="add-row"><button class="chip-btn" data-act="add-map" data-id="'+owner+'">+ 고덕지도</button><button class="chip-btn" data-act="add-link" data-id="'+owner+'">+ 네이버 링크</button><button class="chip-btn" data-act="add-photo" data-id="'+owner+'">+ 사진</button></div>':"";
+    if(!all.length&&!obj.photos.length&&!adds&&!addLink)return "";
+    return '<div class="foot">'+(maps.length?'<div class="links">'+linksHTML(owner,maps)+'</div>':'')+(others.length?'<div class="links">'+linksHTML(owner,others)+'</div>':'')+
+      (obj.photos.length?'<div class="photos">'+photosHTML(owner,obj.photos)+'</div>':'')+addLink+(ui.addLink===owner?"":adds)+'</div>';
+  }
+  function editForm(it,dayId){
+    var id=it?it.id:"new-"+dayId;
+    return '<form class="form card" data-form="stop" data-id="'+id+'" data-day="'+dayId+'">'+
+      '<div class="form-row"><label style="max-width:130px">시간<input id="f-time-'+id+'" name="time" value="'+esc(it?it.time:"")+'" placeholder="14:00"></label>'+
+      '<label style="max-width:140px">분류<select id="f-tag-'+id+'" name="tag">'+TAGS.map(function(t){return '<option'+(((it&&it.tag)||"휴식")===t?" selected":"")+'>'+t+'</option>';}).join("")+'</select></label></div>'+
+      '<label>제목<input id="f-title-'+id+'" name="title" value="'+esc(it?it.title:"")+'" required placeholder="예: 동관지에 카페"></label>'+
+      '<label>메모<textarea id="f-note-'+id+'" name="note" placeholder="주소, 팁, 예약 정보 등">'+esc(it?it.note:"")+'</textarea></label>'+
+      '<div class="form-actions"><button type="button" class="btn" data-act="cancel">취소</button><button class="btn primary">'+(it?"수정 완료":"일정 추가")+'</button></div></form>';
+  }
+  function stopHTML(it,d){
+    if(ui.edit===it.id)return '<div class="stop"><div class="stop-time">'+esc(it.time)+'</div>'+editForm(it,d.id)+'</div>';
+    var conf=ui.confirm===it.id?'<div class="confirm"><span>이 일정을 삭제할까요?</span><span style="display:flex;gap:6px"><button class="btn" data-act="cancel">취소</button><button class="btn warn" data-act="del-stop" data-id="'+it.id+'">삭제</button></span></div>':"";
+    return '<div class="stop"><div class="stop-time">'+esc(it.time)+'</div><article class="card">'+
+      '<div class="card-head"><div class="card-title"><span class="tag" data-t="'+esc(it.tag)+'">'+esc(it.tag)+'</span>'+esc(it.title)+'</div>'+
+      (canEdit()?'<div class="tools"><button class="icon-btn" data-act="edit" data-id="'+it.id+'">수정</button><button class="icon-btn danger" data-act="ask-del" data-id="'+it.id+'">삭제</button></div>':'')+'</div>'+
+      (it.note?'<div class="card-note">'+esc(it.note)+'</div>':'')+conf+footHTML(it.id,it)+'</article></div>';
+  }
+  function panelHTML(){
+    if(canEdit())return "";
+    if(!ui.panel)return "";
+    return '<form class="panel form" data-form="token">'+
+      '<strong>편집 모드 켜기</strong>'+
+      '<ol><li>GitHub → Settings → Developer settings → <b>Fine-grained tokens</b> → Generate new token</li>'+
+      '<li>Repository access: <b>Only select repositories</b> → <code>'+esc(OWNER+"/"+REPO)+'</code></li>'+
+      '<li>Permissions → Repository permissions → <b>Contents: Read and write</b></li>'+
+      '<li>만든 키(github_pat_…)를 아래에 붙여넣기. 이 기기 브라우저에만 저장돼요.</li></ol>'+
+      '<label>저장 키<input id="tok" name="tok" type="password" autocomplete="off" placeholder="github_pat_…" required></label>'+
+      '<div class="form-actions"><button type="button" class="btn" data-act="cancel">취소</button><button class="btn primary">편집 모드 켜기</button></div></form>';
+  }
+  function render(){
+    var t=state.trip,h='<div class="wrap">';
+    h+='<div class="modebar"><span class="pill"><span class="dot'+(canEdit()?' on':'')+'"></span>'+(canEdit()?"편집 모드":"보기 모드")+'</span>'+
+      (canEdit()?'<button class="chip-btn" data-act="logout">편집 모드 끄기</button>':(ui.panel?'':'<button class="chip-btn" data-act="panel">편집하기</button>'))+'</div>'+panelHTML();
+    if(errMsg)h+='<p class="status err">'+esc(errMsg)+'</p>';
+    h+='<header class="pass"><div class="pass-top"><span class="eyebrow">Dalian · 大连 · 2026</span><h1>'+esc(t.title)+'</h1><span class="pass-sub">'+esc(t.sub)+'</span></div>'+
+      '<div class="legs">'+state.flights.map(function(f,i){return '<div class="leg"><span class="code">'+(i?"오는편":"가는편")+' · '+esc(f.code)+'</span><span class="route">'+esc(f.route)+'</span><span class="when">'+esc(f.when)+'</span>'+(f.delay?'<span class="delay">'+esc(f.delay)+'</span>':'')+'</div>';}).join("")+'</div>'+
+      '<div class="stay"><b>숙소</b> '+esc(t.stay)+'</div></header>';
+    h+='<nav class="jump" aria-label="날짜 이동">'+state.days.map(function(d){return '<a href="#'+d.id+'">'+esc(d.label)+' · '+esc(d.date)+'</a>';}).join("")+'<a href="#refs">참고 링크</a></nav>';
+    state.days.forEach(function(d){
+      d.items.sort(function(a,b){return sortKey(a.time)-sortKey(b.time);});
+      h+='<section class="day" id="'+d.id+'"><div class="day-head"><h2>'+esc(d.label)+'</h2><span class="date">'+esc(d.date)+'</span></div><div class="timeline">';
+      h+=d.items.map(function(it){return stopHTML(it,d);}).join("");
+      if(canEdit())h+=ui.edit==="new-"+d.id?'<div class="stop"><div class="stop-time">새 일정</div>'+editForm(null,d.id)+'</div>':'<button class="chip-btn add-stop" data-act="new" data-id="'+d.id+'">+ '+esc(d.label)+' 일정 추가</button>';
+      h+='</div></section>';
+    });
+    h+='<section class="refs" id="refs"><h2>참고 링크 · 사진</h2><div class="card">'+(footHTML("refs",state.refs)||'<span class="card-note">아직 없어요.</span>')+'</div></section>';
+    h+='<p class="status">'+esc(msg||(canEdit()?"수정한 뒤 아래 '저장'을 누르면 GitHub에 기록돼요.":"보기 모드예요. 수정하려면 위의 '편집하기'를 눌러 주세요."))+'</p></div>';
+    if(dirty&&canEdit())h+='<div class="savebar" role="status"><span>저장하지 않은 변경사항이 있어요</span><button class="btn ghost" data-act="discard">되돌리기</button><button class="btn" data-act="save"'+(saving?" disabled":"")+'>'+(saving?"저장 중…":"저장")+'</button></div>';
+    h+='<input type="file" id="photo-input" accept="image/*" multiple hidden>';
+    $app.innerHTML=h;
+  }
+  function focusFirst(){var el=$app.querySelector("form input");if(el)el.focus();}
+
+  /* ── 클릭 ── */
+  var photoOwner=null;
+  $app.addEventListener("click",function(e){
+    var b=e.target.closest("[data-act]");if(!b)return;
+    var a=b.dataset.act,id=b.dataset.id;
+    if(a==="panel"){ui.panel=true;render();focusFirst();}
+    else if(a==="logout"){try{localStorage.removeItem(TK);}catch(err){}token=null;sha=null;errMsg="";msg="편집 모드를 껐어요.";render();}
+    else if(a==="edit"){ui={edit:id,confirm:null,addLink:null};render();focusFirst();}
+    else if(a==="new"){ui={edit:"new-"+id,confirm:null,addLink:null};render();focusFirst();}
+    else if(a==="cancel"){e.preventDefault();ui={edit:null,confirm:null,addLink:null,panel:false};render();}
+    else if(a==="ask-del"){ui={edit:null,confirm:id,addLink:null};render();}
+    else if(a==="del-stop"){state.days.forEach(function(d){d.items=d.items.filter(function(x){return x.id!==id;});});ui.confirm=null;markDirty();}
+    else if(a==="add-link"||a==="add-map"){ui={edit:null,confirm:null,addLink:id,linkKind:a==="add-map"?"map":"web"};render();focusFirst();}
+    else if(a==="del-link"){target(id).links.splice(+b.dataset.i,1);markDirty();}
+    else if(a==="del-photo"){target(id).photos.splice(+b.dataset.i,1);markDirty();}
+    else if(a==="add-photo"){photoOwner=id;document.getElementById("photo-input").click();}
+    else if(a==="save")save();
+    else if(a==="discard"){state=clone(saved);dirty=false;clearDraft();render();}
+  });
+
+  /* ── 폼 ── */
+  $app.addEventListener("submit",function(e){
+    e.preventDefault();var f=e.target,fd=new FormData(f),id=f.dataset.id;
+    if(f.dataset.form==="token"){
+      var tk=(fd.get("tok")||"").trim();if(!tk)return;
+      token=tk;try{localStorage.setItem(TK,tk);}catch(err){}
+      ui.panel=false;errMsg="";msg="편집 모드를 켰어요.";load();return;
+    }
+    if(f.dataset.form==="stop"){
+      var v={time:(fd.get("time")||"").trim(),tag:fd.get("tag"),title:(fd.get("title")||"").trim(),note:(fd.get("note")||"").trim()};
+      if(!v.title)return;
+      if(id.indexOf("new-")===0){var d=state.days.filter(function(x){return x.id===f.dataset.day;})[0];d.items.push(Object.assign({id:uid()},v,{links:[],photos:[]}));}
+      else Object.assign(findItem(id).it,v);
+      ui.edit=null;markDirty();
+    }else if(f.dataset.form==="link"){
+      var raw=(fd.get("url")||"").trim(),m=raw.match(/https?:\/\/[^\s，。]+/),url=safeUrl(m?m[0]:raw);
+      if(!url){msg="링크는 https:// 로 시작하는 주소를 넣어 주세요.";render();return;}
+      var ln={url:url,label:(fd.get("label")||"").trim()};if(f.dataset.kind==="map")ln.kind="map";
+      target(id).links.push(ln);ui.addLink=null;msg="";markDirty();
+    }
+  });
+
+  /* ── 사진: 줄여서 저장소 photos/ 폴더에 올림 ── */
+  function shrink(file){return new Promise(function(res,rej){var img=new Image(),u=URL.createObjectURL(file);
+    img.onload=function(){var s=Math.min(1,1600/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext("2d").drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL("image/jpeg",.82));};
+    img.onerror=function(){rej(new Error("이미지 파일이 아니에요"));};img.src=u;});}
+  $app.addEventListener("change",async function(e){
+    if(e.target.id!=="photo-input"||!photoOwner)return;
+    var files=[].slice.call(e.target.files),owner=photoOwner;photoOwner=null;if(!files.length)return;
+    msg="사진 올리는 중… (0/"+files.length+")";render();var ok=0,fail="";
+    for(var i=0;i<files.length;i++){
+      try{
+        var dataUrl=await shrink(files[i]),path="photos/"+Date.now()+"-"+uid()+".jpg";
+        var r=await gh(path,{method:"PUT",body:JSON.stringify({message:"사진 추가",content:dataUrl.split(",")[1],branch:BRANCH})});
+        if(!r.ok)throw new Error(r.status===401||r.status===403?"저장 키 권한을 확인해 주세요":"업로드 실패 ("+r.status+")");
+        localImg[path]=dataUrl;target(owner).photos.push({path:path,cap:files[i].name});ok++;
+        msg="사진 올리는 중… ("+ok+"/"+files.length+")";render();
+      }catch(err){fail=err.message;}
+    }
+    msg=fail?"사진 "+ok+"장 올림. 나머지는 실패했어요: "+fail:"사진 "+ok+"장 올렸어요. '저장'을 눌러야 일정에 붙어요.";
+    markDirty();
+  });
+
+  /* ── 저장: data.json을 GitHub에 커밋 ── */
+  async function save(){
+    if(!token)return;saving=true;render();
+    try{
+      if(!sha){var g=await gh(FILE);if(g.ok)sha=(await g.json()).sha;}
+      var body={message:"일정 수정",content:b64enc(JSON.stringify(state,null,1)),branch:BRANCH};if(sha)body.sha=sha;
+      var r=await gh(FILE,{method:"PUT",body:JSON.stringify(body)});
+      if(r.ok){var j=await r.json();sha=j.content.sha;saved=clone(state);dirty=false;clearDraft();msg="저장했어요. 다른 기기에는 1~2분 뒤에 보여요.";}
+      else if(r.status===409||r.status===422){msg="다른 기기에서 먼저 저장했어요. 최신본을 불러온 뒤 다시 수정해 주세요.";sha=null;}
+      else if(r.status===401||r.status===403||r.status===404){msg="저장하지 못했어요. 저장 키가 만료됐거나 Contents 쓰기 권한이 없어요.";}
+      else msg="저장하지 못했어요 ("+r.status+"). 잠시 후 다시 눌러 주세요.";
+    }catch(e){msg="GitHub에 연결하지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.";}
+    saving=false;render();
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

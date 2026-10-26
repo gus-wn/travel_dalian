@@ -216,6 +216,11 @@ button{cursor:pointer}
   .link-row a::after{content:"  " attr(href);display:block;font-size:7.5pt;color:var(--sub);word-break:break-all}
   .photos{grid-template-columns:repeat(3,1fr)}
 }
+.dropzone{border:3px dashed var(--line);background:var(--blue-soft);padding:14px;text-align:center;font-family:var(--pixel);font-size:15px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.card.dropping{outline:4px dashed var(--pink);outline-offset:6px;background:var(--pink-soft)}
+.photo.broken::after{content:"사진을 불러오지 못했어요";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;font-family:var(--pixel);font-size:13px;color:var(--sub);background:var(--blue-soft)}
+.photo.broken img{opacity:0}
+@media print{.dropzone{display:none}}
 </style>
 </head>
 <body>
@@ -306,7 +311,7 @@ button{cursor:pointer}
         (canEdit()?'<button class="icon-btn danger" data-act="del-link" data-id="'+owner+'" data-i="'+i+'" aria-label="링크 삭제">삭제</button>':'')+'</div>';}).join("");
   }
   function photosHTML(owner,photos){
-    return photos.map(function(p,i){return '<div class="photo"><a href="'+esc(imgSrc(p))+'" target="_blank" rel="noopener"><img src="'+esc(imgSrc(p))+'" alt="'+esc(p.cap||"여행 사진")+'" loading="lazy"></a>'+
+    return photos.map(function(p,i){return '<div class="photo"><a href="'+esc(imgSrc(p))+'" target="_blank" rel="noopener"><img src="'+esc(imgSrc(p))+'" alt="'+esc(p.cap||"여행 사진")+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest(\'.photo\').classList.add(\'broken\')"></a>'+
       (canEdit()?'<button data-act="del-photo" data-id="'+owner+'" data-i="'+i+'" aria-label="사진 삭제">✕</button>':'')+'</div>';}).join("");
   }
   function footHTML(owner,obj){
@@ -318,10 +323,16 @@ button{cursor:pointer}
         '<div class="form-row"><label>'+(g?"고덕지도 링크":"링크 주소")+'<input id="ln-url-'+owner+'" name="url" type="text" inputmode="url" placeholder="'+(g?"https://surl.amap.com/...":"https://blog.naver.com/... 등 아무 링크")+'" required></label>'+
         '<label>이름 (선택)<input id="ln-label-'+owner+'" name="label" placeholder="'+(g?"예: 시딩 파빌리온점":"예: 시딩 후기")+'"></label></div>'+
         '<div class="form-actions"><button type="button" class="btn" data-act="cancel">취소</button><button class="btn primary">링크 추가</button></div></form>';}
+    var addPhoto="";
+    if(ui.addPhoto===owner){
+      addPhoto='<form class="form" data-form="photo-url" data-id="'+owner+'">'+
+        '<label>사진 주소 (이미지 링크)<input id="ph-url-'+owner+'" name="url" type="text" inputmode="url" placeholder="https://… .jpg / .png"></label>'+
+        '<div class="dropzone" data-owner="'+owner+'">여기로 사진을 끌어다 놓거나 <button type="button" class="chip-btn" data-act="pick-photo" data-id="'+owner+'">파일에서 고르기</button></div>'+
+        '<div class="form-actions"><button type="button" class="btn" data-act="cancel">닫기</button><button class="btn primary">주소로 추가</button></div></form>';}
     var adds='<div class="add-row"><button class="chip-btn" data-act="add-map" data-id="'+owner+'">+ 고덕지도</button><button class="chip-btn" data-act="add-link" data-id="'+owner+'">+ 링크</button><button class="chip-btn" data-act="add-photo" data-id="'+owner+'">+ 사진</button></div>';
     if(!all.length&&!obj.photos.length&&!adds&&!addLink)return "";
-    return '<div class="foot">'+(maps.length?'<div class="links">'+linksHTML(owner,maps)+'</div>':'')+(others.length?'<div class="links">'+linksHTML(owner,others)+'</div>':'')+
-      (obj.photos.length?'<div class="photos">'+photosHTML(owner,obj.photos)+'</div>':'')+addLink+(ui.addLink===owner?"":adds)+'</div>';
+    return '<div class="foot" data-owner="'+owner+'">'+(maps.length?'<div class="links">'+linksHTML(owner,maps)+'</div>':'')+(others.length?'<div class="links">'+linksHTML(owner,others)+'</div>':'')+
+      (obj.photos.length?'<div class="photos">'+photosHTML(owner,obj.photos)+'</div>':'')+addLink+addPhoto+(ui.addLink===owner||ui.addPhoto===owner?"":adds)+'</div>';
   }
   function editForm(it,dayId){
     var id=it?it.id:"new-"+dayId;
@@ -394,7 +405,8 @@ button{cursor:pointer}
     else if(a==="add-link"||a==="add-map"){ui={edit:null,confirm:null,addLink:id,linkKind:a==="add-map"?"map":"web"};render();focusFirst();}
     else if(a==="del-link"){target(id).links.splice(+b.dataset.i,1);markDirty();}
     else if(a==="del-photo"){target(id).photos.splice(+b.dataset.i,1);markDirty();}
-    else if(a==="add-photo"){photoOwner=id;document.getElementById("photo-input").click();}
+    else if(a==="add-photo"){ui={edit:null,confirm:null,addLink:null,addPhoto:id};render();focusFirst();}
+    else if(a==="pick-photo"){photoOwner=id;document.getElementById("photo-input").click();}
     else if(a==="print")doPrint();
     else if(a==="save")save();
     else if(a==="discard"){state=clone(saved);dirty=false;clearDraft();render();}
@@ -419,6 +431,10 @@ button{cursor:pointer}
       if(!url){msg="링크는 https:// 로 시작하는 주소를 넣어 주세요.";render();return;}
       var ln={url:url,label:(fd.get("label")||"").trim()};if(f.dataset.kind==="map")ln.kind="map";
       target(id).links.push(ln);ui.addLink=null;msg="";markDirty();
+    }else if(f.dataset.form==="photo-url"){
+      var pr=(fd.get("url")||"").trim(),pm=pr.match(/https?:\/\/\S+/),pu=safeUrl(pm?pm[0]:pr);
+      if(!pu){msg="사진 주소는 https:// 로 시작해야 해요.";render();return;}
+      target(id).photos.push({url:pu,cap:""});ui.addPhoto=null;msg="사진을 붙였어요. '저장'을 눌러야 남아요.";markDirty();
     }
   });
 
@@ -428,8 +444,12 @@ button{cursor:pointer}
     img.onerror=function(){rej(new Error("이미지 파일이 아니에요"));};img.src=u;});}
   $app.addEventListener("change",async function(e){
     if(e.target.id!=="photo-input"||!photoOwner)return;
-    var files=[].slice.call(e.target.files),owner=photoOwner;photoOwner=null;if(!files.length)return;
-    msg="사진 올리는 중… (0/"+files.length+")";render();var ok=0,fail="";
+    var files=[].slice.call(e.target.files),owner=photoOwner;photoOwner=null;e.target.value="";uploadFiles(files,owner);
+  });
+  async function uploadFiles(files,owner){
+    files=files.filter(function(f){return /^image\//.test(f.type);});
+    if(!files.length){msg="사진 파일(jpg, png 등)만 넣을 수 있어요.";render();return;}
+    ui.addPhoto=null;msg="사진 올리는 중… (0/"+files.length+")";render();var ok=0,fail="";
     for(var i=0;i<files.length;i++){
       try{
         var dataUrl=await shrink(files[i]),path="photos/"+Date.now()+"-"+uid()+".jpg";
@@ -441,6 +461,27 @@ button{cursor:pointer}
     }
     msg=fail?"사진 "+ok+"장 올림. 나머지는 실패했어요: "+fail:"사진 "+ok+"장 올렸어요. '저장'을 눌러야 일정에 붙어요.";
     markDirty();
+  }
+
+  /* ── 끌어다 놓기: 카드 아무 곳에나 사진 파일이나 웹 이미지를 놓으면 추가 ── */
+  function ownerOf(el){var f=el&&el.closest&&el.closest("[data-owner]");return f?f.dataset.owner:null;}
+  var hot=null;
+  function setHot(el){if(hot&&hot!==el)hot.classList.remove("dropping");hot=el;if(el)el.classList.add("dropping");}
+  $app.addEventListener("dragover",function(e){
+    var card=e.target.closest&&e.target.closest(".card");if(!card||!card.querySelector("[data-owner]"))return;
+    e.preventDefault();e.dataTransfer.dropEffect="copy";setHot(card);
+  });
+  $app.addEventListener("dragleave",function(e){if(hot&&!hot.contains(e.relatedTarget))setHot(null);});
+  $app.addEventListener("drop",function(e){
+    var card=e.target.closest&&e.target.closest(".card");if(!card)return;
+    var owner=ownerOf(card.querySelector("[data-owner]"));setHot(null);if(!owner)return;e.preventDefault();
+    if(!canEdit()){ui={edit:null,confirm:null,addLink:null,panel:true};errMsg="사진을 넣으려면 먼저 편집 모드를 켜 주세요.";render();scrollTo({top:0,behavior:"smooth"});return;}
+    var files=[].slice.call(e.dataTransfer.files||[]);
+    if(files.length){uploadFiles(files,owner);return;}
+    var html=e.dataTransfer.getData("text/html")||"",m=html.match(/<img[^>]+src="([^"]+)"/i);
+    var u=safeUrl(m?m[1].replace(/&amp;/g,"&"):(e.dataTransfer.getData("text/uri-list")||e.dataTransfer.getData("text/plain")||"").split("\n")[0].trim());
+    if(u){target(owner).photos.push({url:u,cap:""});msg="사진을 붙였어요. '저장'을 눌러야 남아요.";markDirty();}
+    else{msg="놓은 것에서 사진을 찾지 못했어요.";render();}
   });
 
   /* ── 저장: data.json을 GitHub에 커밋 ── */

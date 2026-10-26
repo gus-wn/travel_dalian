@@ -29,7 +29,7 @@
      "time": "11:40",
      "tag": "이동",
      "title": "대련 저우수이쯔 공항 도착",
-     "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분",
+     "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분\n11/20 11:20 → 11:40",
      "links": [],
      "photos": []
     },
@@ -58,7 +58,7 @@
      "time": "13:30",
      "tag": "쇼핑",
      "title": "파빌리온(柏威年, pavilion)",
-     "note": "팝마트, 모어요거트, 루이싱커피 등\n* 여기 화장실깔꼼",
+     "note": "팝마트, 모어요거트, 루이싱커피 등\n* 여기 화장실깔꼼\n\n[지하 1층] 몰리티,모어요거트 \n[1층] 몰리랜드\n[4층] 오락실",
      "links": [
       {
        "url": "https://surl.amap.com/dSkyUDP1u9cz",
@@ -125,8 +125,8 @@
      "id": "a5",
      "time": "16:30",
      "tag": "마사지",
-     "title": "마사지 ①",
-     "note": "호텔 근처로 돌아와서 마사지",
+     "title": "마사지 - 양쯔족도/ 良子足道(民主广场店)",
+     "note": "호텔 근처로 돌아와서 마사지\n11:00-24:00 (지점별 변동 가능)\n辽宁省大连市中山区明泽街15号",
      "links": [
       {
        "url": "https://www.amap.com/ssr/place/B0FFIG35WX",
@@ -134,7 +134,20 @@
        "kind": "map"
       }
      ],
-     "photos": []
+     "photos": [
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMTJfMTU3%2FMDAxNzczMjgyODY3MzQz.A_yCpgFxTEktc-FF9_rA_rbXMpUuWxGteRqS_27Pl-4g.sgQ3a1jx79N6zEkBfp07NC1aQ3ExBSuGfhOKcMcD_jwg.JPEG%2F20260201_215952.jpg&type=sc960_832",
+       "cap": ""
+      },
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjEwMDZfNzQg%2FMDAxNzkxMjcyMTAzNzIx.Xvr4z4Ruu3KVhObjQepN_ggmZTqluVuDQFDVV6y8jbsg.MsJiqWigkiqlKL5FPWkhglOdk717oLnBmS_jF1bk0KMg.JPEG%2F900_20260627_221018.jpg&type=sc960_832",
+       "cap": ""
+      },
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA1MDVfMTQz%2FMDAxNzc3OTcyMDA4MzEy.zC2Hu8nFmcUh4l88UAUMnPi3cbq938_d6T0bJX_dCvAg.rjWsnUI9Makm8MYFgsbGXXdsLDzG4ohXpq_xrcdda0cg.JPEG%2F20260420%25A3%25DF161058%25A3%25A80%25A3%25A9.jpg&type=sc960_832",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "a3",
@@ -162,7 +175,16 @@
      "title": "동방수성 야경 산책",
      "note": "시딩에서 나와 바로. 조명 켜진 운하 따라 산책",
      "links": [],
-     "photos": []
+     "photos": [
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMjBfMjUg%2FMDAxNzY2MTkwMzAzNTQx.3leKJpNbh95bWbmjZNfHQ1QNWorfCJYB1a_M3llZ3Hgg.HHulpgMfJAeb1B6nZtuaOcWr1LoT2c_zpDH3TkdZM14g.JPEG%2F20251214%25A3%25DF171338.jpg&type=sc960_832",
+       "cap": ""
+      },
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA2MTZfNyAg%2FMDAxNzUwMDI4MjUwMDcw.hJbJIW3SIRFgUeb-KM5x-p1a2x2OgoMExDc0hwYu6yQg.VIN1IRMG89GWwiYAWy1p0fJnG_woFfh-sMhdQKOAjFAg.JPEG%2F900%25A3%25DF20250510%25A3%25DF191537.jpg&type=sc960_832",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "a7",
@@ -269,6 +291,15 @@
      "time": "21:00",
      "tag": "이동",
      "title": "택시로 호텔 복귀",
+     "note": "",
+     "links": [],
+     "photos": []
+    },
+    {
+     "id": "0r5wxez",
+     "time": "",
+     "tag": "휴식",
+     "title": "대련 지엔빙 시켜먹기",
      "note": "",
      "links": [],
      "photos": []

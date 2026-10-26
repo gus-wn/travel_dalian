@@ -193,19 +193,29 @@
      "id": "b1",
      "time": "오전",
      "tag": "휴식",
-     "title": "헤드스파 ㅋㅋ",
-     "note": "첫날 이동이 많았으니 여유 있게",
+     "title": "헤드스파(FAVIS By ReMINGLE)",
+     "note": "2만원대 60분\n10:00~21:00\n타임스퀘어 2층\n大连时代广场二层 L253 商铺",
      "links": [],
-     "photos": []
+     "photos": [
+      {
+       "url": "https://postfiles.pstatic.net/MjAyNjAzMDVfMTMg/MDAxNzcyNjk5MzUzOTIw.n1EU494m7ajCb85yAIq-1pRV3SNbRD7-XBwqnYTUZq0g.IfTAyNGMGmDe2McOykGZ2Qi2mODO8XF1CsBBBSGHclkg.JPEG/IMG%EF%BC%BF7178.jpg?type=w966",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "b2",
      "time": "11:00",
      "tag": "휴식",
      "title": "동관지에(东关街) · 대련의 성수",
-     "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟",
+     "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기.",
      "links": [],
-     "photos": []
+     "photos": [
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MDhfMTg4%2FMDAxNzUxOTU3Mjk5MTc2.0WDMmKDOZmArH05YfeyX-GXFNbKrKMqr1mu_co3HYxcg.iMXRXL3wu0T-_SVICLpDXe8OSZlT20I4YndwI7f7JKEg.JPEG%2FKakaoTalk_20250617_104546472_10.jpg&type=sc960_832",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "b3",
@@ -283,7 +293,7 @@
      "id": "c2",
      "time": "12:00",
      "tag": "식사",
-     "title": "점심 + 카페",
+     "title": "신흥전승오리구이",
      "note": "호텔·중산광장 근처에서 느긋하게",
      "links": [],
      "photos": []

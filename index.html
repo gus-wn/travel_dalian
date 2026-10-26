@@ -408,7 +408,11 @@ a{color:var(--accent)}
     h+='<input type="file" id="photo-input" accept="image/*" multiple hidden>';
     $app.innerHTML=h;
   }
-  function focusFirst(){var el=$app.querySelector("form input");if(el)el.focus();}
+  function focusFirst(){
+    var el=$app.querySelector('form[data-form="stop"] input,form[data-form="link"] input,form[data-form="photo-url"] input,form[data-form="token"] input');
+    if(!el)return;el.focus({preventScroll:true});
+    var f=el.closest("form");if(f)f.scrollIntoView({block:"nearest"});
+  }
 
   /* ── 클릭 ── */
   var photoOwner=null;

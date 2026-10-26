@@ -176,11 +176,51 @@ button{cursor:pointer}
 .mapcard img{width:100%;height:auto;display:block;box-shadow:0 0 0 2px var(--line)}
 .mapcard figcaption{font-family:var(--pixel);font-size:15px;display:flex;align-items:center;gap:8px;padding:0 2px}
 .mapcard figcaption span{color:var(--sub);font-family:var(--body);font-size:13px}
+.printrow{display:flex;justify-content:center;padding:6px 0 10px}
+.printrow .btn{font-size:16px;padding:10px 20px;display:inline-flex;gap:8px;align-items:center}
+.print-only{display:none}
+@page{size:A5;margin:14mm 12mm 16mm}
+@page{@bottom-center{content:counter(page);font-size:9pt;color:#6b6385}}
+@page :first{@bottom-center{content:none}}
+@media print{
+  html:root:not(#x){--sky:#ffffff;--paper:#ffffff;--line:#2a2440;--text:#2a2440;--sub:#5a5370;--shade:#cfe3f5;
+    --pink:#e85a8c;--pink-soft:#ffe1ec;--blue:#2f7fd0;--blue-soft:#eaf4ff;--yellow:#ffcb47;--mint:#3fb47c;
+    --t-move:#5b86b8;--t-food:#e07d1f;--t-massage:#d94c86;--t-night:#5a55d6;--t-rest:#2f9e6b;--t-shop:#a656cf;color-scheme:light}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff;padding:0;font-size:10.5pt;line-height:1.55}
+  .wrap{max-width:none;gap:0}
+  .modebar,.panel,.jump,.add-row,.add-stop,.tools,.savebar,.printrow,.status,.confirm,form,.photo button,.link-row .icon-btn,.mapcard figcaption span{display:none!important}
+  .print-only{display:block}
+  .cover{order:-2}.mapcard{order:-1}
+  .foot:not(:has(.links,.photos)){display:none}
+  /* 표지 */
+  .cover{break-after:page;min-height:178mm;display:flex;flex-direction:column;justify-content:center;gap:10mm}
+  .cover .book-label{font-family:var(--pixel);font-size:12pt;color:var(--pink);text-align:center;letter-spacing:.1em}
+  .cover .book-foot{font-family:var(--pixel);font-size:10pt;color:var(--sub);text-align:center}
+  .pass{box-shadow:0 0 0 2px var(--line),0 4px 0 2px var(--shade)}
+  .pass h1{font-size:28pt}
+  /* 지도: 한 쪽 */
+  .mapcard{break-after:page;box-shadow:none;padding:0}
+  .mapcard figcaption{font-size:13pt;order:-1;padding-bottom:3mm}
+  /* 날짜마다 새 장 */
+  .day,.refs{break-before:page}
+  .day-head{padding-bottom:2mm;border-bottom:2px dashed var(--line);margin-bottom:2mm}
+  .day-head h2{font-size:18pt}
+  .stop,.card,.photo{break-inside:avoid}
+  .timeline{gap:5mm}
+  .card{box-shadow:0 0 0 2px var(--line);padding:3mm 4mm}
+  .card-title{font-size:11.5pt}
+  .card-note{font-size:10pt}
+  .stop-time{font-size:10pt}
+  .link-row a{white-space:normal;color:var(--blue);text-decoration:none}
+  .link-row a::after{content:"  " attr(href);display:block;font-size:7.5pt;color:var(--sub);word-break:break-all}
+  .photos{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
 <main id="app"><p style="text-align:center;color:#888">불러오는 중…</p></main>
-<script type="application/json" id="fallback">{"trip": {"title": "대련 2박 3일", "sub": "11월 20일 금 – 11월 22일 일 · 하루 한 번 마사지, 저녁엔 야경", "stay": "노보텔 대련 중산광장 · 长江路 28号 · 중산광장 도보 3분"}, "flights": [{"code": "CZ686", "route": "인천 T1 → 대련 주수이쯔", "when": "11/20 11:20 → 11:40", "delay": ""}, {"code": "CZ675", "route": "대련 주수이쯔 → 인천 T1", "when": "11/22 19:30 → 21:55", "delay": "지연: 원래 19:20 → 21:40"}], "days": [{"id": "d1", "label": "1일차", "date": "11/20 금", "items": [{"id": "a1", "time": "11:40", "tag": "이동", "title": "대련 저우수이쯔 공항 도착", "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분", "links": [], "photos": []}, {"id": "a2", "time": "13:00", "tag": "휴식", "title": "노보텔 대련 중산 체크인", "note": "짐 풀고 잠깐 쉬기 (체크인 12시부터)", "links": [], "photos": []}, {"id": "a3", "time": "13:30", "tag": "식사", "title": "시딩(喜鼎) 점심", "note": "파빌리온 근처 지점. 성게만두 필수. 지도앱에서 喜鼎 검색", "links": [], "photos": []}, {"id": "a4", "time": "14:30", "tag": "쇼핑", "title": "파빌리온(柏威年) 구경 + 카페", "note": "팝마트·지하 마트 구경, 카페에서 느긋하게 앉아 있기", "links": [], "photos": []}, {"id": "a5", "time": "16:30", "tag": "마사지", "title": "마사지 ①", "note": "호텔·파빌리온 근처 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색", "links": [], "photos": []}, {"id": "a6", "time": "19:00", "tag": "야경", "title": "동방수성 야경 + 저녁", "note": "택시 약 10분. 조명 켜진 운하 산책 후 운하뷰 식당", "links": [], "photos": []}, {"id": "a7", "time": "21:30", "tag": "야경", "title": "중산광장 야경 → 호텔", "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물", "links": [], "photos": []}]}, {"id": "d2", "label": "2일차", "date": "11/21 토", "items": [{"id": "b1", "time": "오전", "tag": "휴식", "title": "늦잠 + 호텔 조식", "note": "첫날 이동이 많았으니 여유 있게", "links": [], "photos": []}, {"id": "b2", "time": "11:00", "tag": "휴식", "title": "동관지에(东关街) · 대련의 성수", "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟", "links": [], "photos": []}, {"id": "b3", "time": "14:00", "tag": "마사지", "title": "마사지 ②", "note": "동관지에 근처 or 호텔 복귀 후 근처", "links": [], "photos": []}, {"id": "b4", "time": "16:00", "tag": "야경", "title": "연화산 전망대 일몰·야경", "note": "성해만대교와 시내가 한눈에. 오후 4시 조금 넘으면 해가 지니 늦지 않게", "links": [], "photos": []}, {"id": "b5", "time": "17:30", "tag": "야경", "title": "성해광장 야경", "note": "불 켜진 성해만대교 앞 산책. 바닷바람 강하니 따뜻하게", "links": [], "photos": []}, {"id": "b6", "time": "18:30", "tag": "식사", "title": "서안로 야시장 저녁", "note": "실내형이라 추워도 OK. 양꼬치·철판오징어·카오렁멘. 알리페이 준비", "links": [], "photos": []}, {"id": "b7", "time": "21:00", "tag": "이동", "title": "택시로 호텔 복귀", "note": "", "links": [], "photos": []}]}, {"id": "d3", "label": "3일차", "date": "11/22 일", "items": [{"id": "c1", "time": "10:00", "tag": "휴식", "title": "체크아웃 전까지 휴식", "note": "체크아웃 12시, 짐은 프런트에 맡기기", "links": [], "photos": []}, {"id": "c2", "time": "12:00", "tag": "식사", "title": "점심 + 카페", "note": "호텔·중산광장 근처에서 느긋하게", "links": [], "photos": []}, {"id": "c3", "time": "14:00", "tag": "마사지", "title": "마사지 ③", "note": "비행 전 90분 길게 받고 개운하게", "links": [], "photos": []}, {"id": "c4", "time": "15:45", "tag": "쇼핑", "title": "파빌리온 지하 마트", "note": "간식·기념품 쇼핑 (호텔에서 가까움)", "links": [], "photos": []}, {"id": "c5", "time": "16:45", "tag": "이동", "title": "호텔에서 짐 찾아 공항으로", "note": "택시 약 15~20분", "links": [], "photos": []}, {"id": "c6", "time": "19:30", "tag": "이동", "title": "CZ675 출발 (지연된 시간)", "note": "인천 21:55 도착. 당일 오전 앱에서 지연 재확인", "links": [], "photos": []}]}], "refs": {"links": [{"label": "참고 블로그 1 · skgus_13", "url": "https://blog.naver.com/skgus_13/224403484998"}, {"label": "참고 블로그 2 · skgus_13", "url": "https://blog.naver.com/skgus_13/224400851162"}, {"label": "참고 블로그 3 · borikong228", "url": "https://blog.naver.com/borikong228/224375333881"}, {"label": "참고 블로그 4 · jeehanna", "url": "https://blog.naver.com/jeehanna/224278645905"}, {"label": "참고 블로그 5 · wnllog", "url": "https://blog.naver.com/wnllog/224424067219"}, {"label": "참고 블로그 6 · i_cherryberry", "url": "https://blog.naver.com/i_cherryberry/224435318202"}], "photos": []}}</script>
+<script type="application/json" id="fallback">{"trip": {"title": "대련 2박 3일", "sub": "11월 20일 금 – 11월 22일 일 · 하루 한 번 마사지, 저녁엔 야경", "stay": "노보텔 대련 중산광장 · 长江路 28号 · 중산광장 도보 3분"}, "flights": [{"code": "CZ686", "route": "인천 T1 → 대련 주수이쯔", "when": "11/20 11:20 → 11:40", "delay": ""}, {"code": "CZ675", "route": "대련 주수이쯔 → 인천 T1", "when": "11/22 19:30 → 21:55", "delay": "지연: 원래 19:20 → 21:40"}], "days": [{"id": "d1", "label": "1일차", "date": "11/20 금", "items": [{"id": "a1", "time": "11:40", "tag": "이동", "title": "대련 저우수이쯔 공항 도착", "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분", "links": [], "photos": []}, {"id": "a2", "time": "13:00", "tag": "휴식", "title": "노보텔 대련 중산 체크인", "note": "짐 풀고 잠깐 쉬기 (체크인 12시부터)", "links": [], "photos": []}, {"id": "a4", "time": "13:30", "tag": "쇼핑", "title": "파빌리온(柏威年) 구경", "note": "팝마트·지하 마트 구경. 배고프면 길게 말고 가볍게 둘러보기", "links": [], "photos": []}, {"id": "a8", "time": "14:30", "tag": "식사", "title": "밍지카오위 (늦은 점심)", "note": "파빌리온 구경하고 바로 가기. 가게 고덕지도 링크를 붙여 두면 길 찾기 편해요", "links": [], "photos": []}, {"id": "a5", "time": "16:30", "tag": "마사지", "title": "마사지 ①", "note": "밍지카오위 먹고 호텔 근처로 돌아와서 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색", "links": [], "photos": []}, {"id": "a3", "time": "19:00", "tag": "식사", "title": "시딩(喜鼎) 동방수성점 저녁", "note": "성게만두 필수. 호텔에서 택시 약 10분. 저녁 시간엔 웨이팅이 있을 수 있어요", "links": [], "photos": []}, {"id": "a6", "time": "20:00", "tag": "야경", "title": "동방수성 야경 산책", "note": "시딩에서 나와 바로. 조명 켜진 운하 따라 산책", "links": [], "photos": []}, {"id": "a7", "time": "21:30", "tag": "야경", "title": "중산광장 야경 → 호텔", "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물", "links": [], "photos": []}]}, {"id": "d2", "label": "2일차", "date": "11/21 토", "items": [{"id": "b1", "time": "오전", "tag": "휴식", "title": "늦잠 + 호텔 조식", "note": "첫날 이동이 많았으니 여유 있게", "links": [], "photos": []}, {"id": "b2", "time": "11:00", "tag": "휴식", "title": "동관지에(东关街) · 대련의 성수", "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟", "links": [], "photos": []}, {"id": "b3", "time": "14:00", "tag": "마사지", "title": "마사지 ②", "note": "동관지에 근처 or 호텔 복귀 후 근처", "links": [], "photos": []}, {"id": "b4", "time": "16:00", "tag": "야경", "title": "연화산 전망대 일몰·야경", "note": "성해만대교와 시내가 한눈에. 오후 4시 조금 넘으면 해가 지니 늦지 않게", "links": [], "photos": []}, {"id": "b5", "time": "17:30", "tag": "야경", "title": "성해광장 야경", "note": "불 켜진 성해만대교 앞 산책. 바닷바람 강하니 따뜻하게", "links": [], "photos": []}, {"id": "b6", "time": "18:30", "tag": "식사", "title": "서안로 야시장 저녁", "note": "실내형이라 추워도 OK. 양꼬치·철판오징어·카오렁멘. 알리페이 준비", "links": [], "photos": []}, {"id": "b7", "time": "21:00", "tag": "이동", "title": "택시로 호텔 복귀", "note": "", "links": [], "photos": []}]}, {"id": "d3", "label": "3일차", "date": "11/22 일", "items": [{"id": "c1", "time": "10:00", "tag": "휴식", "title": "체크아웃 전까지 휴식", "note": "체크아웃 12시, 짐은 프런트에 맡기기", "links": [], "photos": []}, {"id": "c2", "time": "12:00", "tag": "식사", "title": "점심 + 카페", "note": "호텔·중산광장 근처에서 느긋하게", "links": [], "photos": []}, {"id": "c3", "time": "14:00", "tag": "마사지", "title": "마사지 ③", "note": "비행 전 90분 길게 받고 개운하게", "links": [], "photos": []}, {"id": "c4", "time": "15:45", "tag": "쇼핑", "title": "파빌리온 지하 마트", "note": "간식·기념품 쇼핑 (호텔에서 가까움)", "links": [], "photos": []}, {"id": "c5", "time": "16:45", "tag": "이동", "title": "호텔에서 짐 찾아 공항으로", "note": "택시 약 15~20분", "links": [], "photos": []}, {"id": "c6", "time": "19:30", "tag": "이동", "title": "CZ675 출발 (지연된 시간)", "note": "인천 21:55 도착. 당일 오전 앱에서 지연 재확인", "links": [], "photos": []}]}], "refs": {"links": [{"label": "참고 블로그 1 · skgus_13", "url": "https://blog.naver.com/skgus_13/224403484998"}, {"label": "참고 블로그 2 · skgus_13", "url": "https://blog.naver.com/skgus_13/224400851162"}, {"label": "참고 블로그 3 · borikong228", "url": "https://blog.naver.com/borikong228/224375333881"}, {"label": "참고 블로그 4 · jeehanna", "url": "https://blog.naver.com/jeehanna/224278645905"}, {"label": "참고 블로그 5 · wnllog", "url": "https://blog.naver.com/wnllog/224424067219"}, {"label": "참고 블로그 6 · i_cherryberry", "url": "https://blog.naver.com/i_cherryberry/224435318202"}], "photos": []}}</script>
 <script>
 (function(){
   /* ── 저장소 설정 ── github.io 주소에서 자동으로 읽고, 아니면 아래 값을 씁니다 */
@@ -219,6 +259,7 @@ button{cursor:pointer}
     "휴식":["..#.#...","...#.#..","........","######..","#++++###","#++++#.#","#++++###",".####..."],
     "쇼핑":["..####..",".#....#.",".#....#.","########","#++++++#","#++++++#","#++++++#","########"],
     plane:["........","....#...","....##..","########","########","....##..","....#...","........"],
+    book:["........","##.##.##","#+#+#+##","#+#+#+##","#+#+#+##","#+#+#+##","##.##.##","........"],
     pin:["..####..",".######.","##++####","##++####",".######.","..####..","...##...","...##..."]
   };
   function px(name,cls){var g=ICONS[name];if(!g)return "";var r="";
@@ -317,9 +358,9 @@ button{cursor:pointer}
     h+='<div class="modebar"><span class="pill"><span class="dot'+(canEdit()?' on':'')+'"></span>'+(canEdit()?"편집 모드":"보기 모드")+'</span>'+
       (canEdit()?'<button class="chip-btn" data-act="logout">편집 모드 끄기</button>':(ui.panel?'':'<button class="chip-btn" data-act="panel">편집하기</button>'))+'</div>'+panelHTML();
     if(errMsg)h+='<p class="status err">'+esc(errMsg)+'</p>';
-    h+='<header class="pass"><div class="pass-top"><span class="eyebrow">'+px("plane")+'DALIAN QUEST · 大连 · 2026</span><h1>'+esc(t.title)+'</h1><span class="pass-sub">'+esc(t.sub)+'</span></div>'+
+    h+='<section class="cover"><p class="print-only book-label">TRAVEL NOTE · 여행 수첩</p>'+'<header class="pass"><div class="pass-top"><span class="eyebrow">'+px("plane")+'DALIAN QUEST · 大连 · 2026</span><h1>'+esc(t.title)+'</h1><span class="pass-sub">'+esc(t.sub)+'</span></div>'+
       '<div class="legs">'+state.flights.map(function(f,i){return '<div class="leg"><span class="code">'+(i?"오는편":"가는편")+' · '+esc(f.code)+'</span><span class="route">'+esc(f.route)+'</span><span class="when">'+esc(f.when)+'</span>'+(f.delay?'<span class="delay">'+esc(f.delay)+'</span>':'')+'</div>';}).join("")+'</div>'+
-      '<div class="stay"><b>숙소</b> '+esc(t.stay)+'</div></header>';
+      '<div class="stay"><b>숙소</b> '+esc(t.stay)+'</div></header><p class="print-only book-foot">'+esc(new Date().toLocaleDateString("ko-KR"))+' 출력</p></section>';
     h+='<nav class="jump" aria-label="날짜 이동">'+state.days.map(function(d){return '<a href="#'+d.id+'">'+esc(d.label)+' · '+esc(d.date)+'</a>';}).join("")+'<a href="#refs">참고 링크</a></nav>';
     state.days.forEach(function(d){
       d.items.sort(function(a,b){return sortKey(a.time)-sortKey(b.time);});
@@ -329,6 +370,7 @@ button{cursor:pointer}
       h+='</div></section>';
     });
     h+='<section class="refs" id="refs"><h2>'+px("pin")+'참고 링크 · 사진</h2><div class="card">'+(footHTML("refs",state.refs)||'<span class="card-note">아직 없어요.</span>')+'</div></section>';
+    h+='<div class="printrow"><button class="btn primary" data-act="print">'+px("book")+'PDF로 저장 (책 모양)</button></div>';
     h+='<p class="status">'+esc(msg||(canEdit()?"수정한 뒤 아래 '저장'을 누르면 GitHub에 기록돼요.":"보기 모드예요. 수정하려면 위의 '편집하기'를 눌러 주세요."))+'</p></div>';
     if(dirty&&canEdit())h+='<div class="savebar" role="status"><div class="savebar-box"><span>저장하지 않은 변경사항이 있어요</span><button class="btn ghost" data-act="discard">되돌리기</button><button class="btn" data-act="save"'+(saving?" disabled":"")+'>'+(saving?"저장 중…":"저장")+'</button></div></div>';
     h+='<input type="file" id="photo-input" accept="image/*" multiple hidden>';
@@ -353,6 +395,7 @@ button{cursor:pointer}
     else if(a==="del-link"){target(id).links.splice(+b.dataset.i,1);markDirty();}
     else if(a==="del-photo"){target(id).photos.splice(+b.dataset.i,1);markDirty();}
     else if(a==="add-photo"){photoOwner=id;document.getElementById("photo-input").click();}
+    else if(a==="print")doPrint();
     else if(a==="save")save();
     else if(a==="discard"){state=clone(saved);dirty=false;clearDraft();render();}
   });
@@ -415,6 +458,11 @@ button{cursor:pointer}
     saving=false;render();
   }
 
+  function doPrint(){
+    [].forEach.call(document.images,function(i){i.loading="eager";});
+    var imgs=[].filter.call(document.images,function(i){return !i.complete;});
+    Promise.all(imgs.map(function(i){return new Promise(function(r){i.onload=i.onerror=r;setTimeout(r,4000);});})).then(function(){window.print();});
+  }
   load();
 })();
 </script>

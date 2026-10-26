@@ -402,11 +402,13 @@ a{color:var(--accent)}
     });
     h+='<section class="refs" id="refs"><h2>참고 링크 · 사진</h2><div class="card">'+(footHTML("refs",state.refs)||'<span class="card-note">아직 없어요.</span>')+'</div></section>';
     h+='<div class="printrow"><button class="btn primary" data-act="print">PDF로 저장 (책 모양)</button></div>';
+    h+='<p class="status" id="ver" style="opacity:.6"></p>';
     h+='<p class="status">'+esc(msg||(canEdit()?"수정한 뒤 아래 '저장'을 누르면 GitHub에 기록돼요.":"보기 모드예요. 수정하려면 위의 '편집하기'를 눌러 주세요."))+'</p></div>';
     if(dirty&&canEdit())h+='<div class="savebar" role="status"><div class="savebar-box'+(saveErr?' bad':'')+'">'+(saveErr?'<span class="save-err">'+esc(saveErr)+'</span>':'<span>저장하지 않은 변경사항이 있어요</span>')+'<button class="btn ghost" data-act="discard">되돌리기</button><button class="btn" data-act="save"'+(saving?" disabled":"")+'>'+(saving?"저장 중…":"저장")+'</button></div></div>';
     if(toast&&!dirty)h+='<div class="savebar" role="status"><div class="savebar-box ok"><span>'+esc(toast)+'</span></div></div>';
     h+='<input type="file" id="photo-input" accept="image/*" multiple hidden>';
-    $app.innerHTML=h;
+    var keepY=window.scrollY;$app.innerHTML=h;if(Math.abs(window.scrollY-keepY)>2)window.scrollTo(0,keepY); /* 다시 그려도 보던 위치 유지 */
+    var vEl=document.getElementById("ver");if(vEl)vEl.textContent="버전 10.26-3";
   }
   function focusFirst(){
     var el=$app.querySelector('form[data-form="stop"] input,form[data-form="link"] input,form[data-form="photo-url"] input,form[data-form="token"] input');

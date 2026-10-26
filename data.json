@@ -61,10 +61,25 @@
      "id": "a8",
      "time": "14:30",
      "tag": "식사",
-     "title": "밍지카오위 (늦은 점심)",
-     "note": "파빌리온 구경하고 바로 가기. 가게 고덕지도 링크를 붙여 두면 길 찾기 편해요",
-     "links": [],
-     "photos": []
+     "title": "밍지카오위 鸣记脆皮烤鱼(柏威年店)",
+     "note": "파빌리온 5층",
+     "links": [
+      {
+       "url": "https://uri.amap.com/search?keyword=%E9%B8%A3%E8%AE%B0%E8%84%86%E7%9A%AE%E7%83%A4%E9%B1%BC&city=%E5%A4%A7%E8%BF%9E",
+       "label": "밍지카오위 파빌리온",
+       "kind": "map"
+      },
+      {
+       "url": "https://m.blog.naver.com/soddomeog/224390200420",
+       "label": "밍지카오위 후기"
+      }
+     ],
+     "photos": [
+      {
+       "url": "https://mblogthumb-phinf.pstatic.net/MjAyNjA4MDFfMjk0/MDAxNzg1NTQyNzA0MTMy.scrbLYoLijnJyzGHVJPQfkU--JlNL1KjYIAv4kqCExMg._rrqPFcxPrLqMq2RCtnemWbIrUHCwXlf4OjzVlJ1EoMg.JPEG/IMG%EF%BC%BF5354.jpg?type=w800",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "a5",

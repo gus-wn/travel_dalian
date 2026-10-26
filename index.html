@@ -170,6 +170,12 @@ button{cursor:pointer}
 .icon-btn{font-size:14px}.day-head .stage{font-size:14px}.link-row .n{font-size:13px}
 .card-title{font-size:17px}
 @media (max-width:480px){.stop-time{font-size:14px}}
+.mapcard{background:var(--paper);padding:10px;display:flex;flex-direction:column;gap:8px;
+  box-shadow:0 -3px 0 0 var(--line),0 3px 0 0 var(--line),-3px 0 0 0 var(--line),3px 0 0 0 var(--line),0 9px 0 0 var(--shade)}
+.mapcard a{display:block;line-height:0}
+.mapcard img{width:100%;height:auto;display:block;box-shadow:0 0 0 2px var(--line)}
+.mapcard figcaption{font-family:var(--pixel);font-size:15px;display:flex;align-items:center;gap:8px;padding:0 2px}
+.mapcard figcaption span{color:var(--sub);font-family:var(--body);font-size:13px}
 </style>
 </head>
 <body>
@@ -307,6 +313,7 @@ button{cursor:pointer}
   }
   function render(){
     var t=state.trip,h='<div class="wrap">';
+    h+='<figure class="mapcard" style="margin:0"><a href="map.png" target="_blank" rel="noopener"><img src="map.png" alt="대련 시내 지도: 공항, 서안로 야시장, 러시아거리, 파빌리온, 중산광장, 동방수성, 연화산 전망대, 성해광장 위치" width="800" height="625"></a><figcaption>'+px("pin")+'대련 한눈에 보기 <span>누르면 크게 보여요</span></figcaption></figure>';
     h+='<div class="modebar"><span class="pill"><span class="dot'+(canEdit()?' on':'')+'"></span>'+(canEdit()?"편집 모드":"보기 모드")+'</span>'+
       (canEdit()?'<button class="chip-btn" data-act="logout">편집 모드 끄기</button>':(ui.panel?'':'<button class="chip-btn" data-act="panel">편집하기</button>'))+'</div>'+panelHTML();
     if(errMsg)h+='<p class="status err">'+esc(errMsg)+'</p>';

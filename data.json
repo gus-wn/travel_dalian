@@ -102,7 +102,7 @@
      "time": "15:30",
      "tag": "쇼핑",
      "title": "과일 쇼핑",
-     "note": "",
+     "note": "여기 과일이 진짜 너무 맛있음.... 유경험자임",
      "links": [
       {
        "url": "https://surl.amap.com/eIB4Gixf9wZ",
@@ -113,6 +113,10 @@
      "photos": [
       {
        "url": "https://postfiles.pstatic.net/MjAyNTA4MzBfNTYg/MDAxNzU2NTUzNjg0NTgx.DGdTtnzqdVNBK9z8RyV8zOHpPP9ETTnPurJ8zGqk4kAg.VgxrVY7sauf4C9gqN4lo_sM2AFEfkIubW0fnnIEQQ5cg.JPEG/IMG%EF%BC%BF8330.jpg?type=w773",
+       "cap": ""
+      },
+      {
+       "url": "https://postfiles.pstatic.net/MjAyNTA4MzBfODEg/MDAxNzU2NTUzNjg1OTc3.k54JSWmMblPfEEY0f0FReknwIdWyINpLqTq7sg1_SoEg.7lRg3GZ2CiGYqHu5QPR-4ZRJTbVwOXc50dARvRgagc0g.JPEG/IMG%EF%BC%BF8331.jpg?type=w773",
        "cap": ""
       }
      ]
@@ -227,8 +231,19 @@
      "tag": "야경",
      "title": "성해광장 야경",
      "note": "불 켜진 성해만대교 앞 산책. 바닷바람 강하니 따뜻하게",
-     "links": [],
-     "photos": []
+     "links": [
+      {
+       "url": "https://surl.amap.com/eYUlZdzdarD",
+       "label": "성해광장",
+       "kind": "map"
+      }
+     ],
+     "photos": [
+      {
+       "url": "https://postfiles.pstatic.net/MjAyNTA4MzBfNDgg/MDAxNzU2NTUzNzQwNjYw.BmjhXerNhknGTmd41MeHT6ancHio6uKL8jZuZjGn78Mg.n0C9Ovm-irnCVfjP9Dr9739HBf0vCzZuQ2vqXtJRsmYg.JPEG/IMG%EF%BC%BF8357.JPG?type=w773",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "b6",
@@ -348,16 +363,6 @@
    "done": false
   },
   {
-   "id": "k1",
-   "text": "중국 무비자 입국 확인 (한국 여권 30일, 2026년 말까지)",
-   "done": false
-  },
-  {
-   "id": "k2",
-   "text": "항공권 · 호텔 예약 확인서 (캡처해 두기)",
-   "done": false
-  },
-  {
    "id": "k3",
    "text": "알리페이 · 위챗페이 설치하고 해외 카드 연결",
    "done": false
@@ -373,16 +378,6 @@
    "done": false
   },
   {
-   "id": "k6",
-   "text": "위안화 현금 조금 (비상용)",
-   "done": false
-  },
-  {
-   "id": "k7",
-   "text": "여행자 보험",
-   "done": false
-  },
-  {
    "id": "k8",
    "text": "보조배터리는 기내 가방에만",
    "done": false
@@ -390,16 +385,6 @@
   {
    "id": "k9",
    "text": "따뜻한 겉옷 · 목도리 (11월 대련 바닷바람)",
-   "done": false
-  },
-  {
-   "id": "k10",
-   "text": "출발 전 PDF로 일정 저장",
-   "done": false
-  },
-  {
-   "id": "k11",
-   "text": "귀국편 CZ675 지연 시간 다시 확인",
    "done": false
   }
  ]

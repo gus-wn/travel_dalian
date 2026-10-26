@@ -39,7 +39,13 @@
      "tag": "휴식",
      "title": "노보텔 대련 중산 체크인",
      "note": "짐 풀고 잠깐 쉬기 (체크인 12시부터)",
-     "links": [],
+     "links": [
+      {
+       "url": "https://surl.amap.com/eeTHCAeA7Gm",
+       "label": "노보텔 대련 중산광장점",
+       "kind": "map"
+      }
+     ],
      "photos": []
     },
     {
@@ -66,7 +72,13 @@
      "tag": "마사지",
      "title": "마사지 ①",
      "note": "밍지카오위 먹고 호텔 근처로 돌아와서 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색",
-     "links": [],
+     "links": [
+      {
+       "url": "https://www.amap.com/ssr/place/B0FFIG35WX",
+       "label": "양쯔족도 良子足道(民主广场店)",
+       "kind": "map"
+      }
+     ],
      "photos": []
     },
     {

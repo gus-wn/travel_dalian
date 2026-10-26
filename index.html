@@ -194,11 +194,14 @@ a{color:var(--accent)}
   .link-row a::after{content:"  " attr(href);display:block;font-size:7.5pt;color:var(--sub);word-break:break-all}
   .photos{grid-template-columns:repeat(3,1fr)}
 }
+.savebar-box.bad{border-color:#e0a09c;border-radius:14px;max-width:560px}
+.save-err{color:#c0605b;flex-basis:100%;text-align:center;font-size:14px}
+.savebar-box.ok{padding:8px 18px}
 </style>
 </head>
 <body>
 <main id="app"><p style="text-align:center;color:#888">불러오는 중…</p></main>
-<script type="application/json" id="fallback">{"trip": {"title": "대련 2박 3일", "sub": "11월 20일 금 – 11월 22일 일 · 하루 한 번 마사지, 저녁엔 야경", "stay": "노보텔 대련 중산광장 · 长江路 28号 · 중산광장 도보 3분"}, "flights": [{"code": "CZ686", "route": "인천 T1 → 대련 주수이쯔", "when": "11/20 11:20 → 11:40", "delay": ""}, {"code": "CZ675", "route": "대련 주수이쯔 → 인천 T1", "when": "11/22 19:30 → 21:55", "delay": "지연: 원래 19:20 → 21:40"}], "days": [{"id": "d1", "label": "1일차", "date": "11/20 금", "items": [{"id": "a1", "time": "11:40", "tag": "이동", "title": "대련 저우수이쯔 공항 도착", "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분", "links": [], "photos": []}, {"id": "a2", "time": "13:00", "tag": "휴식", "title": "노보텔 대련 중산 체크인", "note": "짐 풀고 잠깐 쉬기 (체크인 12시부터)", "links": [], "photos": []}, {"id": "a4", "time": "13:30", "tag": "쇼핑", "title": "파빌리온(柏威年) 구경", "note": "팝마트·지하 마트 구경. 배고프면 길게 말고 가볍게 둘러보기", "links": [], "photos": []}, {"id": "a8", "time": "14:30", "tag": "식사", "title": "밍지카오위 (늦은 점심)", "note": "파빌리온 구경하고 바로 가기. 가게 고덕지도 링크를 붙여 두면 길 찾기 편해요", "links": [], "photos": []}, {"id": "a5", "time": "16:30", "tag": "마사지", "title": "마사지 ①", "note": "밍지카오위 먹고 호텔 근처로 돌아와서 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색", "links": [], "photos": []}, {"id": "a3", "time": "19:00", "tag": "식사", "title": "시딩(喜鼎) 동방수성점 저녁", "note": "성게만두 필수. 호텔에서 택시 약 10분. 저녁 시간엔 웨이팅이 있을 수 있어요", "links": [], "photos": []}, {"id": "a6", "time": "20:00", "tag": "야경", "title": "동방수성 야경 산책", "note": "시딩에서 나와 바로. 조명 켜진 운하 따라 산책", "links": [], "photos": []}, {"id": "a7", "time": "21:30", "tag": "야경", "title": "중산광장 야경 → 호텔", "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물", "links": [], "photos": []}]}, {"id": "d2", "label": "2일차", "date": "11/21 토", "items": [{"id": "b1", "time": "오전", "tag": "휴식", "title": "늦잠 + 호텔 조식", "note": "첫날 이동이 많았으니 여유 있게", "links": [], "photos": []}, {"id": "b2", "time": "11:00", "tag": "휴식", "title": "동관지에(东关街) · 대련의 성수", "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟", "links": [], "photos": []}, {"id": "b3", "time": "14:00", "tag": "마사지", "title": "마사지 ②", "note": "동관지에 근처 or 호텔 복귀 후 근처", "links": [], "photos": []}, {"id": "b4", "time": "16:00", "tag": "야경", "title": "연화산 전망대 일몰·야경", "note": "성해만대교와 시내가 한눈에. 오후 4시 조금 넘으면 해가 지니 늦지 않게", "links": [], "photos": []}, {"id": "b5", "time": "17:30", "tag": "야경", "title": "성해광장 야경", "note": "불 켜진 성해만대교 앞 산책. 바닷바람 강하니 따뜻하게", "links": [], "photos": []}, {"id": "b6", "time": "18:30", "tag": "식사", "title": "서안로 야시장 저녁", "note": "실내형이라 추워도 OK. 양꼬치·철판오징어·카오렁멘. 알리페이 준비", "links": [], "photos": []}, {"id": "b7", "time": "21:00", "tag": "이동", "title": "택시로 호텔 복귀", "note": "", "links": [], "photos": []}]}, {"id": "d3", "label": "3일차", "date": "11/22 일", "items": [{"id": "c1", "time": "10:00", "tag": "휴식", "title": "체크아웃 전까지 휴식", "note": "체크아웃 12시, 짐은 프런트에 맡기기", "links": [], "photos": []}, {"id": "c2", "time": "12:00", "tag": "식사", "title": "점심 + 카페", "note": "호텔·중산광장 근처에서 느긋하게", "links": [], "photos": []}, {"id": "c3", "time": "14:00", "tag": "마사지", "title": "마사지 ③", "note": "비행 전 90분 길게 받고 개운하게", "links": [], "photos": []}, {"id": "c4", "time": "15:45", "tag": "쇼핑", "title": "파빌리온 지하 마트", "note": "간식·기념품 쇼핑 (호텔에서 가까움)", "links": [], "photos": []}, {"id": "c5", "time": "16:45", "tag": "이동", "title": "호텔에서 짐 찾아 공항으로", "note": "택시 약 15~20분", "links": [], "photos": []}, {"id": "c6", "time": "19:30", "tag": "이동", "title": "CZ675 출발 (지연된 시간)", "note": "인천 21:55 도착. 당일 오전 앱에서 지연 재확인", "links": [], "photos": []}]}], "refs": {"links": [{"label": "참고 블로그 1 · skgus_13", "url": "https://blog.naver.com/skgus_13/224403484998"}, {"label": "참고 블로그 2 · skgus_13", "url": "https://blog.naver.com/skgus_13/224400851162"}, {"label": "참고 블로그 3 · borikong228", "url": "https://blog.naver.com/borikong228/224375333881"}, {"label": "참고 블로그 4 · jeehanna", "url": "https://blog.naver.com/jeehanna/224278645905"}, {"label": "참고 블로그 5 · wnllog", "url": "https://blog.naver.com/wnllog/224424067219"}, {"label": "참고 블로그 6 · i_cherryberry", "url": "https://blog.naver.com/i_cherryberry/224435318202"}], "photos": []}}</script>
+<script type="application/json" id="fallback">{"trip": {"title": "대련 2박 3일", "sub": "11월 20일 금 – 11월 22일 일 · 하루 한 번 마사지, 저녁엔 야경", "stay": "노보텔 대련 중산광장 · 长江路 28号 · 중산광장 도보 3분"}, "flights": [{"code": "CZ686", "route": "인천 T1 → 대련 주수이쯔", "when": "11/20 11:20 → 11:40", "delay": ""}, {"code": "CZ675", "route": "대련 주수이쯔 → 인천 T1", "when": "11/22 19:30 → 21:55", "delay": "지연: 원래 19:20 → 21:40"}], "days": [{"id": "d1", "label": "1일차", "date": "11/20 금", "items": [{"id": "a1", "time": "11:40", "tag": "이동", "title": "대련 저우수이쯔 공항 도착", "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분", "links": [], "photos": []}, {"id": "a2", "time": "13:00", "tag": "휴식", "title": "노보텔 대련 중산 체크인", "note": "짐 풀고 잠깐 쉬기 (체크인 12시부터)", "links": [{"url": "https://surl.amap.com/eeTHCAeA7Gm", "label": "노보텔 대련 중산광장점", "kind": "map"}], "photos": []}, {"id": "a4", "time": "13:30", "tag": "쇼핑", "title": "파빌리온(柏威年) 구경", "note": "팝마트·지하 마트 구경. 배고프면 길게 말고 가볍게 둘러보기", "links": [], "photos": []}, {"id": "a8", "time": "14:30", "tag": "식사", "title": "밍지카오위 (늦은 점심)", "note": "파빌리온 구경하고 바로 가기. 가게 고덕지도 링크를 붙여 두면 길 찾기 편해요", "links": [], "photos": []}, {"id": "a5", "time": "16:30", "tag": "마사지", "title": "마사지 ①", "note": "밍지카오위 먹고 호텔 근처로 돌아와서 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색", "links": [{"url": "https://www.amap.com/ssr/place/B0FFIG35WX", "label": "양쯔족도 良子足道(民主广场店)", "kind": "map"}], "photos": []}, {"id": "a3", "time": "19:00", "tag": "식사", "title": "시딩(喜鼎) 동방수성점 저녁", "note": "성게만두 필수. 호텔에서 택시 약 10분. 저녁 시간엔 웨이팅이 있을 수 있어요", "links": [], "photos": []}, {"id": "a6", "time": "20:00", "tag": "야경", "title": "동방수성 야경 산책", "note": "시딩에서 나와 바로. 조명 켜진 운하 따라 산책", "links": [], "photos": []}, {"id": "a7", "time": "21:30", "tag": "야경", "title": "중산광장 야경 → 호텔", "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물", "links": [], "photos": []}]}, {"id": "d2", "label": "2일차", "date": "11/21 토", "items": [{"id": "b1", "time": "오전", "tag": "휴식", "title": "늦잠 + 호텔 조식", "note": "첫날 이동이 많았으니 여유 있게", "links": [], "photos": []}, {"id": "b2", "time": "11:00", "tag": "휴식", "title": "동관지에(东关街) · 대련의 성수", "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟", "links": [], "photos": []}, {"id": "b3", "time": "14:00", "tag": "마사지", "title": "마사지 ②", "note": "동관지에 근처 or 호텔 복귀 후 근처", "links": [], "photos": []}, {"id": "b4", "time": "16:00", "tag": "야경", "title": "연화산 전망대 일몰·야경", "note": "성해만대교와 시내가 한눈에. 오후 4시 조금 넘으면 해가 지니 늦지 않게", "links": [], "photos": []}, {"id": "b5", "time": "17:30", "tag": "야경", "title": "성해광장 야경", "note": "불 켜진 성해만대교 앞 산책. 바닷바람 강하니 따뜻하게", "links": [], "photos": []}, {"id": "b6", "time": "18:30", "tag": "식사", "title": "서안로 야시장 저녁", "note": "실내형이라 추워도 OK. 양꼬치·철판오징어·카오렁멘. 알리페이 준비", "links": [], "photos": []}, {"id": "b7", "time": "21:00", "tag": "이동", "title": "택시로 호텔 복귀", "note": "", "links": [], "photos": []}]}, {"id": "d3", "label": "3일차", "date": "11/22 일", "items": [{"id": "c1", "time": "10:00", "tag": "휴식", "title": "체크아웃 전까지 휴식", "note": "체크아웃 12시, 짐은 프런트에 맡기기", "links": [], "photos": []}, {"id": "c2", "time": "12:00", "tag": "식사", "title": "점심 + 카페", "note": "호텔·중산광장 근처에서 느긋하게", "links": [], "photos": []}, {"id": "c3", "time": "14:00", "tag": "마사지", "title": "마사지 ③", "note": "비행 전 90분 길게 받고 개운하게", "links": [], "photos": []}, {"id": "c4", "time": "15:45", "tag": "쇼핑", "title": "파빌리온 지하 마트", "note": "간식·기념품 쇼핑 (호텔에서 가까움)", "links": [], "photos": []}, {"id": "c5", "time": "16:45", "tag": "이동", "title": "호텔에서 짐 찾아 공항으로", "note": "택시 약 15~20분", "links": [], "photos": []}, {"id": "c6", "time": "19:30", "tag": "이동", "title": "CZ675 출발 (지연된 시간)", "note": "인천 21:55 도착. 당일 오전 앱에서 지연 재확인", "links": [], "photos": []}]}], "refs": {"links": [{"label": "참고 블로그 1 · skgus_13", "url": "https://blog.naver.com/skgus_13/224403484998"}, {"label": "참고 블로그 2 · skgus_13", "url": "https://blog.naver.com/skgus_13/224400851162"}, {"label": "참고 블로그 3 · borikong228", "url": "https://blog.naver.com/borikong228/224375333881"}, {"label": "참고 블로그 4 · jeehanna", "url": "https://blog.naver.com/jeehanna/224278645905"}, {"label": "참고 블로그 5 · wnllog", "url": "https://blog.naver.com/wnllog/224424067219"}, {"label": "참고 블로그 6 · i_cherryberry", "url": "https://blog.naver.com/i_cherryberry/224435318202"}], "photos": []}}</script>
 <script>
 (function(){
   /* ── 저장소 설정 ── github.io 주소에서 자동으로 읽고, 아니면 아래 값을 씁니다 */
@@ -212,7 +215,7 @@ a{color:var(--accent)}
   var TK="dalian-gh-token", LS="dalian-gh-draft";
 
   var TAGS=["이동","식사","마사지","야경","휴식","쇼핑"];
-  var saved=null, state=null, sha=null, token=null, dirty=false, saving=false, msg="", errMsg="";
+  var saved=null, state=null, sha=null, token=null, dirty=false, saving=false, msg="", errMsg="", saveErr="", toast="";
   var ui={edit:null,confirm:null,addLink:null,linkKind:"web",panel:false};
   var localImg={}; /* 방금 올린 사진: GitHub Pages가 갱신되기 전까지 화면에 바로 보이게 */
   try{token=localStorage.getItem(TK);}catch(e){}
@@ -251,7 +254,7 @@ a{color:var(--accent)}
   function b64dec(b64){var bin=atob(b64.replace(/\n/g,"")),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);}
 
   function gh(path,opts){
-    opts=opts||{};var h={"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
+    opts=opts||{};var h={"Accept":"application/vnd.github+json"};
     if(token)h.Authorization="Bearer "+token;
     if(opts.body)h["Content-Type"]="application/json";
     return fetch(API+path+(opts.method?"":"?ref="+BRANCH+"&t="+Date.now()),{method:opts.method||"GET",headers:h,body:opts.body,cache:"no-store"});
@@ -356,7 +359,8 @@ a{color:var(--accent)}
     h+='<section class="refs" id="refs"><h2>참고 링크 · 사진</h2><div class="card">'+(footHTML("refs",state.refs)||'<span class="card-note">아직 없어요.</span>')+'</div></section>';
     h+='<div class="printrow"><button class="btn primary" data-act="print">PDF로 저장 (책 모양)</button></div>';
     h+='<p class="status">'+esc(msg||(canEdit()?"수정한 뒤 아래 '저장'을 누르면 GitHub에 기록돼요.":"보기 모드예요. 수정하려면 위의 '편집하기'를 눌러 주세요."))+'</p></div>';
-    if(dirty&&canEdit())h+='<div class="savebar" role="status"><div class="savebar-box"><span>저장하지 않은 변경사항이 있어요</span><button class="btn ghost" data-act="discard">되돌리기</button><button class="btn" data-act="save"'+(saving?" disabled":"")+'>'+(saving?"저장 중…":"저장")+'</button></div></div>';
+    if(dirty&&canEdit())h+='<div class="savebar" role="status"><div class="savebar-box'+(saveErr?' bad':'')+'">'+(saveErr?'<span class="save-err">'+esc(saveErr)+'</span>':'<span>저장하지 않은 변경사항이 있어요</span>')+'<button class="btn ghost" data-act="discard">되돌리기</button><button class="btn" data-act="save"'+(saving?" disabled":"")+'>'+(saving?"저장 중…":"저장")+'</button></div></div>';
+    if(toast&&!dirty)h+='<div class="savebar" role="status"><div class="savebar-box ok"><span>'+esc(toast)+'</span></div></div>';
     h+='<input type="file" id="photo-input" accept="image/*" multiple hidden>';
     $app.innerHTML=h;
   }
@@ -390,8 +394,7 @@ a{color:var(--accent)}
     e.preventDefault();var f=e.target,fd=new FormData(f),id=f.dataset.id;
     if(f.dataset.form==="token"){
       var tk=(fd.get("tok")||"").trim();if(!tk)return;
-      token=tk;try{localStorage.setItem(TK,tk);}catch(err){}
-      ui.panel=false;errMsg="";msg="편집 모드를 켰어요.";load();return;
+      verifyToken(tk);return;
     }
     if(f.dataset.form==="stop"){
       var v={time:(fd.get("time")||"").trim(),tag:fd.get("tag"),title:(fd.get("title")||"").trim(),note:(fd.get("note")||"").trim()};
@@ -458,17 +461,34 @@ a{color:var(--accent)}
   });
 
   /* ── 저장: data.json을 GitHub에 커밋 ── */
+  async function verifyToken(tk){
+    errMsg="키를 확인하는 중…";render();
+    var old=token;token=tk;
+    try{var r=await gh(FILE);
+      if(r.ok){sha=(await r.json()).sha;try{localStorage.setItem(TK,tk);}catch(e){}ui.panel=false;errMsg="";msg="편집 모드를 켰어요.";load();return;}
+      errMsg=r.status===401?"키가 올바르지 않아요. 복사할 때 앞뒤가 잘리지 않았는지, 만료되지 않았는지 확인해 주세요.":
+        "이 키로는 "+OWNER+"/"+REPO+" 저장소를 열 수 없어요. 키를 만들 때 Repository access에서 이 저장소를 골랐는지 확인해 주세요. ("+r.status+")";
+    }catch(e){errMsg="GitHub에 연결하지 못했어요. 인터넷 연결을 확인해 주세요.";}
+    token=old;ui.panel=true;render();
+  }
+  async function ghMsg(r){try{var j=await r.json();return j&&j.message?j.message:"";}catch(e){return "";}}
   async function save(){
     if(!token)return;saving=true;render();
+    saveErr="";
     try{
-      if(!sha){var g=await gh(FILE);if(g.ok)sha=(await g.json()).sha;}
-      var body={message:"일정 수정",content:b64enc(JSON.stringify(state,null,1)),branch:BRANCH};if(sha)body.sha=sha;
-      var r=await gh(FILE,{method:"PUT",body:JSON.stringify(body)});
-      if(r.ok){var j=await r.json();sha=j.content.sha;saved=clone(state);dirty=false;clearDraft();msg="저장했어요. 다른 기기에는 1~2분 뒤에 보여요.";}
-      else if(r.status===409||r.status===422){msg="다른 기기에서 먼저 저장했어요. 최신본을 불러온 뒤 다시 수정해 주세요.";sha=null;}
-      else if(r.status===401||r.status===403||r.status===404){msg="저장하지 못했어요. 저장 키가 만료됐거나 Contents 쓰기 권한이 없어요.";}
-      else msg="저장하지 못했어요 ("+r.status+"). 잠시 후 다시 눌러 주세요.";
-    }catch(e){msg="GitHub에 연결하지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.";}
+      for(var attempt=0;attempt<2;attempt++){
+        if(!sha||attempt>0){var g=await gh(FILE);if(g.ok)sha=(await g.json()).sha;}
+        var body={message:"일정 수정",content:b64enc(JSON.stringify(state,null,1)),branch:BRANCH};if(sha)body.sha=sha;
+        var r=await gh(FILE,{method:"PUT",body:JSON.stringify(body)});
+        if(r.ok){var j=await r.json();sha=j.content.sha;saved=clone(state);dirty=false;clearDraft();msg="";toast="저장했어요! 다른 기기에는 1~2분 뒤에 보여요.";setTimeout(function(){toast="";render();},4000);break;}
+        if((r.status===409||r.status===422)&&attempt===0)continue;
+        var gm=await ghMsg(r);
+        saveErr=r.status===401?"저장 키가 올바르지 않거나 만료됐어요. 위의 '편집 모드 끄기'를 누르고 키를 다시 넣어 주세요.":
+          (r.status===403||r.status===404)?"저장 키에 쓰기 권한이 없어요. GitHub 키 설정에서 Contents를 'Read and write'로 바꿔 주세요.":
+          "저장하지 못했어요";
+        saveErr+=" ("+r.status+(gm?" · "+gm:"")+")";break;
+      }
+    }catch(e){saveErr="GitHub에 연결하지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.";}
     saving=false;render();
   }
 

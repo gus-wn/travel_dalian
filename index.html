@@ -273,8 +273,18 @@ a{color:var(--accent)}
     if(!data){try{var r2=await fetch(FILE+"?t="+Date.now(),{cache:"no-store"});if(r2.ok)data=await r2.json();}catch(e){}}
     if(!data)data=JSON.parse(document.getElementById("fallback").textContent);
     saved=data;state=clone(saved);
-    try{var d=localStorage.getItem(LS);if(d){var p=JSON.parse(d);if(p&&p.base===JSON.stringify(saved)){state=p.state;dirty=true;}}}catch(e){}
+    try{var d=localStorage.getItem(LS);if(d){var p=JSON.parse(d);
+      if(p&&p.state&&JSON.stringify(p.state)!==JSON.stringify(saved)){
+        if(p.base!==JSON.stringify(saved))mergeNew(p.state,saved); /* 저장 못 한 수정본 + 그사이 새로 생긴 링크·사진 */
+        state=p.state;dirty=true;msg="저장하지 못했던 수정 내용을 다시 불러왔어요. 아래 '저장'을 눌러 주세요.";}}}catch(e){}
     render();
+  }
+  function mergeNew(dst,src){
+    var map={};dst.days.forEach(function(d){d.items.forEach(function(it){map[it.id]=it;});});map.refs=dst.refs;
+    var all=[["refs",src.refs]];src.days.forEach(function(d){d.items.forEach(function(it){all.push([it.id,it]);});});
+    all.forEach(function(p){var t=map[p[0]];if(!t)return;
+      p[1].links.forEach(function(l){if(!t.links.some(function(x){return x.url===l.url;}))t.links.push(l);});
+      p[1].photos.forEach(function(ph){if(!t.photos.some(function(x){return (x.path||x.url)===(ph.path||ph.url);}))t.photos.push(ph);});});
   }
   function markDirty(){dirty=true;try{localStorage.setItem(LS,JSON.stringify({base:JSON.stringify(saved),state:state}));}catch(e){}render();}
   function clearDraft(){try{localStorage.removeItem(LS);}catch(e){}}

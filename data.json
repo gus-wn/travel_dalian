@@ -46,16 +46,32 @@
        "kind": "map"
       }
      ],
-     "photos": []
+     "photos": [
+      {
+       "url": "https://q-xx.bstatic.com/xdata/images/hotel/max500/914666071.jpg?k=e923c05398c7f7d28bb2441a138be18d8a1d2da7a3e9bd3ba10a4bfc060fb05a&o=",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "a4",
      "time": "13:30",
      "tag": "쇼핑",
-     "title": "파빌리온(柏威年) 구경",
-     "note": "팝마트·지하 마트 구경. 배고프면 길게 말고 가볍게 둘러보기",
-     "links": [],
-     "photos": []
+     "title": "파빌리온(柏威年, pavilion)",
+     "note": "팝마트, 모어요거트, 루이싱커피 등\n* 여기 화장실깔꼼",
+     "links": [
+      {
+       "url": "https://surl.amap.com/dSkyUDP1u9cz",
+       "label": "파빌리온",
+       "kind": "map"
+      }
+     ],
+     "photos": [
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMTZfMjE2%2FMDAxNzYzMjgzNjU2MjMw.JHUI-3W0WgrW2OFW-Fu4wwnCsYaQWTg23ysR2afxKQog.J-83CxwnOGB9DDbZx0PdDnuezaRwj_7Bai_5yE_7pZgg.JPEG%2FIMG_9583.jpg&type=sc960_832",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "a8",
@@ -82,11 +98,31 @@
      ]
     },
     {
+     "id": "esaz1mi",
+     "time": "15:30",
+     "tag": "쇼핑",
+     "title": "과일 쇼핑",
+     "note": "",
+     "links": [
+      {
+       "url": "https://surl.amap.com/eIB4Gixf9wZ",
+       "label": "과일시장",
+       "kind": "map"
+      }
+     ],
+     "photos": [
+      {
+       "url": "https://postfiles.pstatic.net/MjAyNTA4MzBfNTYg/MDAxNzU2NTUzNjg0NTgx.DGdTtnzqdVNBK9z8RyV8zOHpPP9ETTnPurJ8zGqk4kAg.VgxrVY7sauf4C9gqN4lo_sM2AFEfkIubW0fnnIEQQ5cg.JPEG/IMG%EF%BC%BF8330.jpg?type=w773",
+       "cap": ""
+      }
+     ]
+    },
+    {
      "id": "a5",
      "time": "16:30",
      "tag": "마사지",
      "title": "마사지 ①",
-     "note": "밍지카오위 먹고 호텔 근처로 돌아와서 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색",
+     "note": "호텔 근처로 돌아와서 마사지",
      "links": [
       {
        "url": "https://www.amap.com/ssr/place/B0FFIG35WX",
@@ -100,10 +136,20 @@
      "id": "a3",
      "time": "19:00",
      "tag": "식사",
-     "title": "시딩(喜鼎) 동방수성점 저녁",
-     "note": "성게만두 필수. 호텔에서 택시 약 10분. 저녁 시간엔 웨이팅이 있을 수 있어요",
-     "links": [],
-     "photos": []
+     "title": "시딩(喜鼎, XI DING) 동방수성점",
+     "note": "성게만두 필수 *\n매일 11:00 ~ 21:00\nLiaoningDalianZhongshanHaizhiyun Road No.49 Dongfang Business Unit Block B31 Northwest Gate\n- 성게만두, 크림새우, 새우죽, 소갈비찜 (가격좀 있음)",
+     "links": [
+      {
+       "url": "https://m.blog.naver.com/gobyway/224281949587",
+       "label": "시딩 후기"
+      }
+     ],
+     "photos": [
+      {
+       "url": "https://blog.kakaocdn.net/dna/dVetqE/dJMcagsrSrS/AAAAAAAAAAAAAAAAAAAAAJasLxPQ9akq9XAq5vBr9FILXRhYk6HDvvCn8ID_KcMw/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1793458799&allow_ip=&allow_referer=&signature=LwfpbxHL%2BUCUSyYDfXbDlG2gN4E%3D",
+       "cap": ""
+      }
+     ]
     },
     {
      "id": "a6",
@@ -120,6 +166,15 @@
      "tag": "야경",
      "title": "중산광장 야경 → 호텔",
      "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물",
+     "links": [],
+     "photos": []
+    },
+    {
+     "id": "powcfww",
+     "time": "22:00",
+     "tag": "야경",
+     "title": "Supermiami Live Club",
+     "note": "",
      "links": [],
      "photos": []
     }

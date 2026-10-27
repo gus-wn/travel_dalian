@@ -51,7 +51,13 @@
        "url": "https://q-xx.bstatic.com/xdata/images/hotel/max500/914666071.jpg?k=e923c05398c7f7d28bb2441a138be18d8a1d2da7a3e9bd3ba10a4bfc060fb05a&o=",
        "cap": ""
       }
-     ]
+     ],
+     "loc": {
+      "lat": 38.925819,
+      "lng": 121.651208,
+      "src": "amap",
+      "from": "https://surl.amap.com/eeTHCAeA7Gm"
+     }
     },
     {
      "id": "a4",
@@ -71,7 +77,13 @@
        "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMTZfMjE2%2FMDAxNzYzMjgzNjU2MjMw.JHUI-3W0WgrW2OFW-Fu4wwnCsYaQWTg23ysR2afxKQog.J-83CxwnOGB9DDbZx0PdDnuezaRwj_7Bai_5yE_7pZgg.JPEG%2FIMG_9583.jpg&type=sc960_832",
        "cap": ""
       }
-     ]
+     ],
+     "loc": {
+      "lat": 38.918042,
+      "lng": 121.629067,
+      "src": "amap",
+      "from": "https://surl.amap.com/dSkyUDP1u9cz"
+     }
     },
     {
      "id": "a8",
@@ -246,7 +258,13 @@
        "url": "https://postfiles.pstatic.net/MjAyNTA4MzBfNDgg/MDAxNzU2NTUzNzQwNjYw.BmjhXerNhknGTmd41MeHT6ancHio6uKL8jZuZjGn78Mg.n0C9Ovm-irnCVfjP9Dr9739HBf0vCzZuQ2vqXtJRsmYg.JPEG/IMG%EF%BC%BF8357.JPG?type=w773",
        "cap": ""
       }
-     ]
+     ],
+     "loc": {
+      "lat": 38.881988,
+      "lng": 121.587925,
+      "src": "amap",
+      "from": "https://surl.amap.com/eYUlZdzdarD"
+     }
     },
     {
      "id": "b6",

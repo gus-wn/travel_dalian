@@ -95,11 +95,6 @@
       {
        "url": "https://m.blog.naver.com/soddomeog/224390200420",
        "label": "밍지카오위 후기"
-      },
-      {
-       "url": "https://surl.amap.com/2WEXKBXY29ma",
-       "label": "밍지카오위 파빌리온",
-       "kind": "map"
       }
      ],
      "photos": [
@@ -121,13 +116,7 @@
      "tag": "마사지",
      "title": "구적족도(鸥迪足道, OD Wellness)",
      "note": "60분 발마사지 99위안(약 2만원)\n매일 10:30 ~ 23:00\n鸥迪足道 中山广场店\n랴오닝성 대련시 중산구 칭니와차오 가도 줴팡지에 9번지 (辽宁省大连市中山区青泥洼桥街道解放街9号)",
-     "links": [
-      {
-       "url": "https://www.amap.com/ssr/place/B0FFIG35WX",
-       "label": "양쯔족도 良子足道(民主广场店)",
-       "kind": "map"
-      }
-     ],
+     "links": [],
      "photos": [
       {
        "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMTJfMTU3%2FMDAxNzczMjgyODY3MzQz.A_yCpgFxTEktc-FF9_rA_rbXMpUuWxGteRqS_27Pl-4g.sgQ3a1jx79N6zEkBfp07NC1aQ3ExBSuGfhOKcMcD_jwg.JPEG%2F20260201_215952.jpg&type=sc960_832",
@@ -153,6 +142,11 @@
       {
        "url": "https://m.blog.naver.com/gobyway/224281949587",
        "label": "시딩 후기"
+      },
+      {
+       "url": "https://surl.amap.com/1Qa67yy17ckW",
+       "label": "시딩",
+       "kind": "map"
       }
      ],
      "photos": [

@@ -1,7 +1,12 @@
 {
- "updated": "2026-10-27T15:41:25+09:00",
- "found": [
-  "시딩(喜鼎) 동방수성점 저녁"
- ],
- "unresolved": []
+ "updated": "2026-10-27T15:42:00+09:00",
+ "found": [],
+ "unresolved": [
+  {
+   "id": "c2",
+   "title": "신흥전승오리구이",
+   "url": "https://www.amap.com/ssr/place/B0FFFFYQYK",
+   "reason": "링크 안에서 좌표를 찾지 못했어요. 지도에서 직접 찍어 주세요."
+  }
+ ]
 }

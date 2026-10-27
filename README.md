@@ -20,4 +20,4 @@
 ## 지도
 
 맨 위 지도는 고덕지도 바탕지도 위에 [Leaflet](https://leafletjs.com) (BSD-2, `lib/leaflet/`)으로 핀을 찍어요.
-일정 카드의 **+ 위치** → 장소 검색(OpenStreetMap) · 좌표 붙여넣기 · 지도에서 직접 찍기 중 하나로 넣으면 돼요.
+일정 카드에 **+ 고덕지도**로 고덕 앱의 공유 링크(surl.amap.com/…)를 넣으면, GitHub Actions(`scripts/resolve_amap.py`)가 링크에서 좌표를 찾아 30초~1분 안에 핀을 찍어요.

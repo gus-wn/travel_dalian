@@ -118,7 +118,7 @@ def resolve(url):
         return None, f"고덕 키로 찾기 실패 ({e.__class__.__name__})"
     if "search" in final or "keyword" in final:
         return None, "검색 링크라 정확한 위치가 없어요. 고덕 앱에서 가게를 연 뒤 '공유'로 받은 링크를 넣어 주세요."
-    return None, "링크 안에서 좌표를 찾지 못했어요. 지도에서 직접 찍어 주세요."
+    return None, "이 링크에는 좌표가 없어요. 고덕 앱에서 가게를 연 뒤 '공유 → 링크 복사'로 받은 링크를 넣어 주세요."
 
 
 def is_map(link):

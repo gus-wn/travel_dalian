@@ -433,7 +433,7 @@ a{color:var(--accent)}
       locBtn=obj.loc?'<button class="chip-btn loc-on" data-act="show-loc" data-id="'+owner+'">지도에서 보기</button>':'';
       if(ui.addLoc===owner)locForm=locFormHTML(owner,obj);
     }
-    var adds='<div class="add-row">'+(owner!=="refs"?'<button class="chip-btn" data-act="add-loc" data-id="'+owner+'">'+(obj.loc?'위치 수정':'+ 위치')+'</button>':'')+locBtn+'<button class="chip-btn" data-act="add-map" data-id="'+owner+'">+ 고덕지도</button><button class="chip-btn" data-act="add-link" data-id="'+owner+'">+ 링크</button><button class="chip-btn" data-act="add-photo" data-id="'+owner+'">+ 사진</button></div>';
+    var adds='<div class="add-row">'+locBtn+'<button class="chip-btn" data-act="add-map" data-id="'+owner+'">+ 고덕지도</button><button class="chip-btn" data-act="add-link" data-id="'+owner+'">+ 링크</button><button class="chip-btn" data-act="add-photo" data-id="'+owner+'">+ 사진</button></div>';
     if(!all.length&&!obj.photos.length&&!adds&&!addLink)return "";
     return '<div class="foot" data-owner="'+owner+'">'+(maps.length?'<div class="links">'+linksHTML(owner,maps)+'</div>':'')+(others.length?'<div class="links">'+linksHTML(owner,others)+'</div>':'')+
       (obj.photos.length?'<div class="photos">'+photosHTML(owner,obj.photos)+'</div>':'')+addLink+addPhoto+locForm+(ui.addLink===owner||ui.addPhoto===owner||ui.addLoc===owner?"":adds)+'</div>';
@@ -453,7 +453,7 @@ a{color:var(--accent)}
     var cnt=locItems().length,dayF=ui.mapDay||"all";
     var chips='<button class="chip-btn'+(dayF==="all"?" on":"")+'" data-act="map-day" data-id="all">전체</button>'+state.days.map(function(d,i){return '<button class="chip-btn'+(dayF===d.id?" on":"")+'" data-act="map-day" data-id="'+d.id+'">Day '+(i+1)+'</button>';}).join("");
     var note=tapFor?'<p class="map-note tap">지도를 눌러 <b>'+esc((findItem(tapFor)||{it:{title:""}}).it.title)+'</b> 위치를 찍어 주세요 <button class="icon-btn" data-act="tap-cancel">취소</button></p>':
-      (cnt?'<p class="map-note">핀을 누르면 일정과 고덕지도 길찾기가 나와요.</p>':'<p class="map-note">아직 찍힌 위치가 없어요. 일정 카드의 <b>+ 위치</b>를 눌러 장소를 검색하거나 지도에서 직접 찍으면 여기에 핀이 생겨요.</p>');
+      (cnt?'<p class="map-note">핀을 누르면 일정과 고덕지도 길찾기가 나와요.</p>':'<p class="map-note">아직 찍힌 위치가 없어요. 일정 카드에 <b>+ 고덕지도</b>로 공유 링크를 넣으면 여기에 핀이 생겨요.</p>');
     return '<section class="mapbox" id="map-sec"><div class="map-head"><h2>대련 지도</h2><div class="map-filter">'+chips+'</div></div>'+
       (hasLeaflet()?'<div id="map-slot"></div>':'<a href="map.png" target="_blank" rel="noopener"><img src="map.png" alt="대련 시내 지도" class="map-fallback"></a>')+note+
       '<p class="map-foot"><a href="map.png" target="_blank" rel="noopener">대련 전체 지도 그림 보기</a></p></section>';

@@ -107,7 +107,13 @@
        "url": "https://mblogthumb-phinf.pstatic.net/MjAyNjA4MDFfMjk0/MDAxNzg1NTQyNzA0MTMy.scrbLYoLijnJyzGHVJPQfkU--JlNL1KjYIAv4kqCExMg._rrqPFcxPrLqMq2RCtnemWbIrUHCwXlf4OjzVlJ1EoMg.JPEG/IMG%EF%BC%BF5354.jpg?type=w800",
        "cap": ""
       }
-     ]
+     ],
+     "loc": {
+      "lat": 38.920787,
+      "lng": 121.639738,
+      "src": "amap",
+      "from": "https://surl.amap.com/2WEXKBXY29ma"
+     }
     },
     {
      "id": "a5",

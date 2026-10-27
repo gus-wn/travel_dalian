@@ -219,11 +219,41 @@ a{color:var(--accent)}
   .ck-bar,.ck-add,.ck-list .icon-btn{display:none!important}
   .ck-list{grid-template-columns:1fr}
 }
+.mapbox{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.map-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.map-head h2{font-size:22px}
+.map-filter{display:flex;gap:6px;flex-wrap:wrap}
+.map-filter .chip-btn{border-style:solid;font-size:13px;padding:1px 11px}
+.map-filter .chip-btn.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+#map-slot{position:relative}
+#map{height:min(62vh,380px);border-radius:4px;border:1px solid var(--line);background:var(--grid);z-index:0}
+#map.tapping{cursor:crosshair;outline:3px dashed var(--c-massage);outline-offset:3px}
+.map-fallback{width:100%;border-radius:4px;display:block}
+.map-note{margin:0;font-size:13px;color:var(--sub)}
+.map-note.tap{background:var(--grid);border-radius:6px;padding:6px 10px;color:var(--text);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.map-foot{margin:0;font-size:12px;text-align:right}
+.pin-wrap{background:none;border:0}
+.pin{display:flex;align-items:center;justify-content:center;width:34px;height:22px;border-radius:999px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);font-family:var(--hand);font-size:12px;color:#3b3b3b}
+.pin b{font-weight:400}
+.leaflet-container{font-family:var(--body)}
+.leaflet-popup-content{margin:10px 12px}
+.pop{display:flex;flex-direction:column;gap:3px;min-width:160px}
+.pop-meta{font-family:var(--hand);font-size:12px;color:#8b9097}
+.pop strong{font-size:14px;line-height:1.4;color:#3b3b3b}
+.pop a{font-size:13px}
+.chip-btn.loc-on{border-style:solid;color:var(--text)}
+.loc-results{display:flex;flex-direction:column;gap:4px;max-height:240px;overflow:auto}
+.loc-pick{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:6px 10px;font-size:14px;display:flex;flex-direction:column}
+.loc-pick:hover{border-color:var(--sub)}
+.loc-pick small{color:var(--sub);font-size:12px}
+@media print{.mapbox{order:-1;break-after:page;border:0;padding:0}.map-filter,.map-note,.map-foot,.leaflet-control-container{display:none!important}#map{height:150mm}}
 </style>
 </head>
 <body>
 <main id="app"><p style="text-align:center;color:#888">불러오는 중…</p></main>
 <script type="application/json" id="fallback">{"trip": {"title": "대련 2박 3일", "sub": "11월 20일 금 – 11월 22일 일 · 하루 한 번 마사지, 저녁엔 야경", "stay": "노보텔 대련 중산광장 · 长江路 28号 · 중산광장 도보 3분"}, "flights": [{"code": "CZ686", "route": "인천 T1 → 대련 주수이쯔", "when": "11/20 11:20 → 11:40", "delay": ""}, {"code": "CZ675", "route": "대련 주수이쯔 → 인천 T1", "when": "11/22 19:30 → 21:55", "delay": "지연: 원래 19:20 → 21:40"}], "days": [{"id": "d1", "label": "1일차", "date": "11/20 금", "items": [{"id": "a1", "time": "11:40", "tag": "이동", "title": "대련 저우수이쯔 공항 도착", "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분", "links": [], "photos": []}, {"id": "a2", "time": "13:00", "tag": "휴식", "title": "노보텔 대련 중산 체크인", "note": "짐 풀고 잠깐 쉬기 (체크인 12시부터)", "links": [{"url": "https://surl.amap.com/eeTHCAeA7Gm", "label": "노보텔 대련 중산광장점", "kind": "map"}], "photos": []}, {"id": "a4", "time": "13:30", "tag": "쇼핑", "title": "파빌리온(柏威年) 구경", "note": "팝마트·지하 마트 구경. 배고프면 길게 말고 가볍게 둘러보기", "links": [], "photos": []}, {"id": "a8", "time": "14:30", "tag": "식사", "title": "밍지카오위 鸣记脆皮烤鱼(柏威年店)", "note": "파빌리온 5층", "links": [{"url": "https://uri.amap.com/search?keyword=%E9%B8%A3%E8%AE%B0%E8%84%86%E7%9A%AE%E7%83%A4%E9%B1%BC&city=%E5%A4%A7%E8%BF%9E", "label": "밍지카오위 파빌리온", "kind": "map"}, {"url": "https://m.blog.naver.com/soddomeog/224390200420", "label": "밍지카오위 후기"}], "photos": [{"url": "https://mblogthumb-phinf.pstatic.net/MjAyNjA4MDFfMjk0/MDAxNzg1NTQyNzA0MTMy.scrbLYoLijnJyzGHVJPQfkU--JlNL1KjYIAv4kqCExMg._rrqPFcxPrLqMq2RCtnemWbIrUHCwXlf4OjzVlJ1EoMg.JPEG/IMG%EF%BC%BF5354.jpg?type=w800", "cap": ""}]}, {"id": "a5", "time": "16:30", "tag": "마사지", "title": "마사지 ①", "note": "밍지카오위 먹고 호텔 근처로 돌아와서 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색", "links": [{"url": "https://www.amap.com/ssr/place/B0FFIG35WX", "label": "양쯔족도 良子足道(民主广场店)", "kind": "map"}], "photos": []}, {"id": "a3", "time": "19:00", "tag": "식사", "title": "시딩(喜鼎) 동방수성점 저녁", "note": "성게만두 필수. 호텔에서 택시 약 10분. 저녁 시간엔 웨이팅이 있을 수 있어요", "links": [], "photos": []}, {"id": "a6", "time": "20:00", "tag": "야경", "title": "동방수성 야경 산책", "note": "시딩에서 나와 바로. 조명 켜진 운하 따라 산책", "links": [], "photos": []}, {"id": "a7", "time": "21:30", "tag": "야경", "title": "중산광장 야경 → 호텔", "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물", "links": [], "photos": []}]}, {"id": "d2", "label": "2일차", "date": "11/21 토", "items": [{"id": "b1", "time": "오전", "tag": "휴식", "title": "늦잠 + 호텔 조식", "note": "첫날 이동이 많았으니 여유 있게", "links": [], "photos": []}, {"id": "b2", "time": "11:00", "tag": "휴식", "title": "동관지에(东关街) · 대련의 성수", "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟", "links": [], "photos": []}, {"id": "b3", "time": "14:00", "tag": "마사지", "title": "마사지 ②", "note": "동관지에 근처 or 호텔 복귀 후 근처", "links": [], "photos": []}, {"id": "b4", "time": "16:00", "tag": "야경", "title": "연화산 전망대 일몰·야경", "note": "성해만대교와 시내가 한눈에. 오후 4시 조금 넘으면 해가 지니 늦지 않게", "links": [], "photos": []}, {"id": "b5", "time": "17:30", "tag": "야경", "title": "성해광장 야경", "note": "불 켜진 성해만대교 앞 산책. 바닷바람 강하니 따뜻하게", "links": [], "photos": []}, {"id": "b6", "time": "18:30", "tag": "식사", "title": "서안로 야시장 저녁", "note": "실내형이라 추워도 OK. 양꼬치·철판오징어·카오렁멘. 알리페이 준비", "links": [], "photos": []}, {"id": "b7", "time": "21:00", "tag": "이동", "title": "택시로 호텔 복귀", "note": "", "links": [], "photos": []}]}, {"id": "d3", "label": "3일차", "date": "11/22 일", "items": [{"id": "c1", "time": "10:00", "tag": "휴식", "title": "체크아웃 전까지 휴식", "note": "체크아웃 12시, 짐은 프런트에 맡기기", "links": [], "photos": []}, {"id": "c2", "time": "12:00", "tag": "식사", "title": "점심 + 카페", "note": "호텔·중산광장 근처에서 느긋하게", "links": [], "photos": []}, {"id": "c3", "time": "14:00", "tag": "마사지", "title": "마사지 ③", "note": "비행 전 90분 길게 받고 개운하게", "links": [], "photos": []}, {"id": "c4", "time": "15:45", "tag": "쇼핑", "title": "파빌리온 지하 마트", "note": "간식·기념품 쇼핑 (호텔에서 가까움)", "links": [], "photos": []}, {"id": "c5", "time": "16:45", "tag": "이동", "title": "호텔에서 짐 찾아 공항으로", "note": "택시 약 15~20분", "links": [], "photos": []}, {"id": "c6", "time": "19:30", "tag": "이동", "title": "CZ675 출발 (지연된 시간)", "note": "인천 21:55 도착. 당일 오전 앱에서 지연 재확인", "links": [], "photos": []}]}], "refs": {"links": [{"label": "참고 블로그 1 · skgus_13", "url": "https://blog.naver.com/skgus_13/224403484998"}, {"label": "참고 블로그 2 · skgus_13", "url": "https://blog.naver.com/skgus_13/224400851162"}, {"label": "참고 블로그 3 · borikong228", "url": "https://blog.naver.com/borikong228/224375333881"}, {"label": "참고 블로그 4 · jeehanna", "url": "https://blog.naver.com/jeehanna/224278645905"}, {"label": "참고 블로그 5 · wnllog", "url": "https://blog.naver.com/wnllog/224424067219"}, {"label": "참고 블로그 6 · i_cherryberry", "url": "https://blog.naver.com/i_cherryberry/224435318202"}], "photos": []}, "checklist": [{"id": "k0", "text": "여권 (유효기간 6개월 이상 남았는지)", "done": false}, {"id": "k1", "text": "중국 무비자 입국 확인 (한국 여권 30일, 2026년 말까지)", "done": false}, {"id": "k2", "text": "항공권 · 호텔 예약 확인서 (캡처해 두기)", "done": false}, {"id": "k3", "text": "알리페이 · 위챗페이 설치하고 해외 카드 연결", "done": false}, {"id": "k4", "text": "로밍 또는 eSIM (카톡·네이버 쓰려면 로밍형이 편해요)", "done": false}, {"id": "k5", "text": "고덕지도 · 디디 택시 · 번역 앱 설치", "done": false}, {"id": "k6", "text": "위안화 현금 조금 (비상용)", "done": false}, {"id": "k7", "text": "여행자 보험", "done": false}, {"id": "k8", "text": "보조배터리는 기내 가방에만", "done": false}, {"id": "k9", "text": "따뜻한 겉옷 · 목도리 (11월 대련 바닷바람)", "done": false}, {"id": "k10", "text": "출발 전 PDF로 일정 저장", "done": false}, {"id": "k11", "text": "귀국편 CZ675 지연 시간 다시 확인", "done": false}]}</script>
+<link rel="stylesheet" href="lib/leaflet/leaflet.css">
+<script src="lib/leaflet/leaflet.js"></script>
 <script>
 (function(){
   /* ── 저장소 설정 ── github.io 주소에서 자동으로 읽고, 아니면 아래 값을 씁니다 */
@@ -338,11 +368,118 @@ a{color:var(--accent)}
         '<label>사진 주소 (이미지 링크)<input id="ph-url-'+owner+'" name="url" type="text" inputmode="url" placeholder="https://… .jpg / .png"></label>'+
         '<div class="dropzone" data-owner="'+owner+'">여기로 사진을 끌어다 놓거나 <button type="button" class="chip-btn" data-act="pick-photo" data-id="'+owner+'">파일에서 고르기</button></div>'+
         '<div class="form-actions"><button type="button" class="btn" data-act="cancel">닫기</button><button class="btn primary">주소로 추가</button></div></form>';}
-    var adds='<div class="add-row"><button class="chip-btn" data-act="add-map" data-id="'+owner+'">+ 고덕지도</button><button class="chip-btn" data-act="add-link" data-id="'+owner+'">+ 링크</button><button class="chip-btn" data-act="add-photo" data-id="'+owner+'">+ 사진</button></div>';
+    var locForm="",locBtn="";
+    if(owner!=="refs"){
+      locBtn=obj.loc?'<button class="chip-btn loc-on" data-act="show-loc" data-id="'+owner+'">지도에서 보기</button>':'';
+      if(ui.addLoc===owner)locForm=locFormHTML(owner,obj);
+    }
+    var adds='<div class="add-row">'+(owner!=="refs"?'<button class="chip-btn" data-act="add-loc" data-id="'+owner+'">'+(obj.loc?'위치 수정':'+ 위치')+'</button>':'')+locBtn+'<button class="chip-btn" data-act="add-map" data-id="'+owner+'">+ 고덕지도</button><button class="chip-btn" data-act="add-link" data-id="'+owner+'">+ 링크</button><button class="chip-btn" data-act="add-photo" data-id="'+owner+'">+ 사진</button></div>';
     if(!all.length&&!obj.photos.length&&!adds&&!addLink)return "";
     return '<div class="foot" data-owner="'+owner+'">'+(maps.length?'<div class="links">'+linksHTML(owner,maps)+'</div>':'')+(others.length?'<div class="links">'+linksHTML(owner,others)+'</div>':'')+
-      (obj.photos.length?'<div class="photos">'+photosHTML(owner,obj.photos)+'</div>':'')+addLink+addPhoto+(ui.addLink===owner||ui.addPhoto===owner?"":adds)+'</div>';
+      (obj.photos.length?'<div class="photos">'+photosHTML(owner,obj.photos)+'</div>':'')+addLink+addPhoto+locForm+(ui.addLink===owner||ui.addPhoto===owner||ui.addLoc===owner?"":adds)+'</div>';
   }
+  /* ── 지도 (고덕 바탕지도 + Leaflet) ── 좌표는 고덕 기준(GCJ-02) */
+  var PI=Math.PI,EA=6378245.0,EE=0.00669342162296594323;
+  function tLat(x,y){var r=-100+2*x+3*y+0.2*y*y+0.1*x*y+0.2*Math.sqrt(Math.abs(x));r+=(20*Math.sin(6*x*PI)+20*Math.sin(2*x*PI))*2/3;r+=(20*Math.sin(y*PI)+40*Math.sin(y/3*PI))*2/3;r+=(160*Math.sin(y/12*PI)+320*Math.sin(y*PI/30))*2/3;return r;}
+  function tLng(x,y){var r=300+x+2*y+0.1*x*x+0.1*x*y+0.1*Math.sqrt(Math.abs(x));r+=(20*Math.sin(6*x*PI)+20*Math.sin(2*x*PI))*2/3;r+=(20*Math.sin(x*PI)+40*Math.sin(x/3*PI))*2/3;r+=(150*Math.sin(x/12*PI)+300*Math.sin(x/30*PI))*2/3;return r;}
+  function wgs2gcj(lat,lng){var dLat=tLat(lng-105,lat-35),dLng=tLng(lng-105,lat-35),rl=lat/180*PI,m=Math.sin(rl);m=1-EE*m*m;var sm=Math.sqrt(m);
+    dLat=(dLat*180)/((EA*(1-EE))/(m*sm)*PI);dLng=(dLng*180)/(EA/sm*Math.cos(rl)*PI);return {lat:+(lat+dLat).toFixed(6),lng:+(lng+dLng).toFixed(6)};}
+  var DALIAN=[38.914,121.625];
+  var TAGCOLOR={"식사":"--c-food","야경":"--c-night","쇼핑":"--c-shop","이동":"--c-move","마사지":"--c-massage","휴식":"--c-rest"};
+  var mapEl=null,map=null,layer=null,markers={},tapFor=null,searchRes={};
+  function hasLeaflet(){return typeof L!=="undefined"&&L.map;}
+  function locItems(){var out=[];state.days.forEach(function(d,di){var n=0;d.items.forEach(function(it){if(it.loc){n++;out.push({d:d,di:di,n:n,it:it});}});});return out;}
+  function mapSectionHTML(){
+    var cnt=locItems().length,dayF=ui.mapDay||"all";
+    var chips='<button class="chip-btn'+(dayF==="all"?" on":"")+'" data-act="map-day" data-id="all">전체</button>'+state.days.map(function(d,i){return '<button class="chip-btn'+(dayF===d.id?" on":"")+'" data-act="map-day" data-id="'+d.id+'">Day '+(i+1)+'</button>';}).join("");
+    var note=tapFor?'<p class="map-note tap">지도를 눌러 <b>'+esc((findItem(tapFor)||{it:{title:""}}).it.title)+'</b> 위치를 찍어 주세요 <button class="icon-btn" data-act="tap-cancel">취소</button></p>':
+      (cnt?'<p class="map-note">핀을 누르면 일정과 고덕지도 길찾기가 나와요.</p>':'<p class="map-note">아직 찍힌 위치가 없어요. 일정 카드의 <b>+ 위치</b>를 눌러 장소를 검색하거나 지도에서 직접 찍으면 여기에 핀이 생겨요.</p>');
+    return '<section class="mapbox" id="map-sec"><div class="map-head"><h2>대련 지도</h2><div class="map-filter">'+chips+'</div></div>'+
+      (hasLeaflet()?'<div id="map-slot"></div>':'<a href="map.png" target="_blank" rel="noopener"><img src="map.png" alt="대련 시내 지도" class="map-fallback"></a>')+note+
+      '<p class="map-foot"><a href="map.png" target="_blank" rel="noopener">대련 전체 지도 그림 보기</a></p></section>';
+  }
+  function mountMap(){
+    if(!hasLeaflet())return;var slot=document.getElementById("map-slot");if(!slot)return;
+    if(!mapEl){
+      mapEl=document.createElement("div");mapEl.id="map";
+      slot.appendChild(mapEl);
+      map=L.map(mapEl,{center:DALIAN,zoom:12,scrollWheelZoom:false,zoomControl:true,attributionControl:true});
+      L.tileLayer("https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{subdomains:"1234",maxZoom:18,minZoom:4,attribution:"© 高德地图 AutoNavi"}).addTo(map);
+      layer=L.layerGroup().addTo(map);
+      map.on("click",function(e){if(!tapFor)return;var f=findItem(tapFor);if(!f){tapFor=null;render();return;}
+        f.it.loc={lat:+e.latlng.lat.toFixed(6),lng:+e.latlng.lng.toFixed(6)};var id=tapFor;tapFor=null;ui.addLoc=null;msg="위치를 찍었어요. '저장'을 눌러야 남아요.";markDirty();focusMarker(id,false);});
+      drawMarkers(true);
+    }else{
+      if(mapEl.parentNode!==slot)slot.appendChild(mapEl);
+      map.invalidateSize();drawMarkers(false);
+    }
+    mapEl.classList.toggle("tapping",!!tapFor);
+  }
+  var lastSig="";
+  function drawMarkers(fit){
+    var dayF=ui.mapDay||"all",list=locItems().filter(function(x){return dayF==="all"||x.d.id===dayF;});
+    var sig=dayF+JSON.stringify(list.map(function(x){return [x.it.id,x.it.loc,x.it.tag,x.it.title,x.it.time,x.n];}));
+    if(sig===lastSig&&!fit)return;var changedFilter=lastSig.split("[")[0]!==dayF;lastSig=sig;
+    layer.clearLayers();markers={};
+    var byDay={};list.forEach(function(x){(byDay[x.d.id]=byDay[x.d.id]||[]).push(x);});
+    Object.keys(byDay).forEach(function(k){var pts=byDay[k].map(function(x){return [x.it.loc.lat,x.it.loc.lng];});
+      if(pts.length>1)L.polyline(pts,{color:"#8b9097",weight:2,dashArray:"5 6",opacity:.9,interactive:false}).addTo(layer);});
+    list.forEach(function(x){
+      var col=getComputedStyle(document.documentElement).getPropertyValue(TAGCOLOR[x.it.tag]||"--line").trim()||"#ccc";
+      var icon=L.divIcon({className:"pin-wrap",html:'<span class="pin" style="background:'+col+'"><b>'+(x.di+1)+'-'+x.n+'</b></span>',iconSize:[34,22],iconAnchor:[17,11],popupAnchor:[0,-10]});
+      var m=L.marker([x.it.loc.lat,x.it.loc.lng],{icon:icon,title:x.it.title}).addTo(layer);
+      m.bindPopup(popupHTML(x));markers[x.it.id]=m;});
+    if(fit||changedFilter){
+      if(list.length===1)map.setView([list[0].it.loc.lat,list[0].it.loc.lng],15);
+      else if(list.length>1)map.fitBounds(L.latLngBounds(list.map(function(x){return [x.it.loc.lat,x.it.loc.lng];})),{padding:[28,28],maxZoom:16});
+      else map.setView(DALIAN,12);
+    }
+  }
+  function amapLinkFor(it){
+    var l=(it.links||[]).filter(function(l){return isMap(l);})[0];
+    if(l)return l.url;
+    return "https://uri.amap.com/marker?position="+it.loc.lng+","+it.loc.lat+"&name="+encodeURIComponent(it.title)+"&coordinate=gaode&callnative=1";
+  }
+  function popupHTML(x){
+    var it=x.it;
+    return '<div class="pop"><span class="pop-meta">Day '+(x.di+1)+' · '+esc(it.time)+' · '+esc(it.tag)+'</span><strong>'+esc(it.title)+'</strong>'+
+      '<a href="'+esc(amapLinkFor(it))+'" target="_blank" rel="noopener">고덕지도에서 열기 · 길찾기</a>'+
+      '<a href="#card-'+it.id+'" class="pop-jump">일정 카드로 이동</a></div>';
+  }
+  function focusMarker(id,scroll){
+    var f=findItem(id);if(!f||!f.it.loc||!map)return;
+    var dIdx=state.days.indexOf(f.d);
+    if(ui.mapDay&&ui.mapDay!=="all"&&ui.mapDay!==f.d.id){ui.mapDay="all";render();}
+    if(scroll){var sec=document.getElementById("map-sec");if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"});}
+    setTimeout(function(){map.setView([f.it.loc.lat,f.it.loc.lng],16);if(markers[id])markers[id].openPopup();},scroll?350:0);
+  }
+  function defaultQuery(it){var zh=(it.title.match(/[\u4e00-\u9fff]+/g)||[]).join(" ");return zh||it.title.replace(/[()·→]/g," ").trim();}
+  function locFormHTML(owner,it){
+    var res=searchRes[owner];
+    var list=res?(res.loading?'<p class="map-note">찾는 중…</p>':(res.err?'<p class="map-note err">'+esc(res.err)+'</p>':
+      (res.items.length?'<div class="loc-results">'+res.items.map(function(r,i){return '<button type="button" class="loc-pick" data-act="loc-pick" data-id="'+owner+'" data-i="'+i+'">'+esc(r.name)+'<small>'+esc(r.sub)+'</small></button>';}).join("")+'</div>':
+        '<p class="map-note">검색 결과가 없어요. 중국어 이름(예: 柏威年)으로 찾아보거나 지도에서 직접 찍어 주세요.</p>'))):"";
+    return '<form class="form loc-form" data-form="loc-search" data-id="'+owner+'">'+
+      '<label>장소 검색 (중국어 이름이 잘 찾아져요 · 좌표 38.92,121.64도 돼요)<input id="loc-q-'+owner+'" name="q" value="'+esc(res&&res.q!=null?res.q:defaultQuery(it))+'" autocomplete="off"></label>'+
+      '<div class="form-actions"><button type="button" class="btn" data-act="cancel">닫기</button>'+(it.loc?'<button type="button" class="btn" data-act="loc-clear" data-id="'+owner+'">위치 지우기</button>':'')+
+      '<button type="button" class="btn" data-act="loc-tap" data-id="'+owner+'">지도에서 직접 찍기</button><button class="btn primary">검색</button></div>'+list+'</form>';
+  }
+  function parseCoords(q){
+    var m=q.match(/(-?\d{2,3}\.\d+)\s*[, ]\s*(-?\d{2,3}\.\d+)/);if(!m)return null;
+    var a=+m[1],b=+m[2];if(a>90){var t=a;a=b;b=t;}            /* 경도,위도 순서여도 알아서 */
+    if(a<15||a>55||b<70||b>140)return null;return {lat:a,lng:b};
+  }
+  async function searchPlace(owner,q){
+    searchRes[owner]={q:q,loading:true};render();
+    try{
+      var url="https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&accept-language=ko,zh,en&viewbox=121.2,39.15,121.95,38.7&bounded=1&q="+encodeURIComponent(q);
+      var r=await fetch(url,{headers:{"Accept":"application/json"}});if(!r.ok)throw new Error(r.status);
+      var j=await r.json();
+      searchRes[owner]={q:q,items:j.map(function(x){var g=wgs2gcj(+x.lat,+x.lon);var parts=(x.display_name||"").split(",");return {name:(x.name||parts[0]||"").trim(),sub:parts.slice(1,4).join(",").trim(),lat:g.lat,lng:g.lng};})};
+    }catch(e){searchRes[owner]={q:q,err:"검색 서버에 연결하지 못했어요. '지도에서 직접 찍기'로 넣어 주세요."};}
+    render();
+  }
+
   function checklistHTML(){
     var L=state.checklist||(state.checklist=[]),done=L.filter(function(c){return c.done;}).length;
     var h='<section class="checklist" id="check"><div class="ck-head"><h2>꼭 챙길 것</h2><span class="ck-count">'+done+' / '+L.length+'</span></div>'+
@@ -365,7 +502,7 @@ a{color:var(--accent)}
   function stopHTML(it,d){
     if(ui.edit===it.id)return '<div class="stop" data-t="'+esc(it.tag)+'"><div class="stop-time">'+esc(it.time)+'</div>'+editForm(it,d.id)+'</div>';
     var conf=ui.confirm===it.id?'<div class="confirm"><span>이 일정을 삭제할까요?</span><span style="display:flex;gap:6px"><button class="btn" data-act="cancel">취소</button><button class="btn warn" data-act="del-stop" data-id="'+it.id+'">삭제</button></span></div>':"";
-    return '<div class="stop" data-t="'+esc(it.tag)+'"><div class="stop-time">'+esc(it.time)+'</div><article class="card">'+
+    return '<div class="stop" id="card-'+it.id+'" data-t="'+esc(it.tag)+'"><div class="stop-time">'+esc(it.time)+'</div><article class="card">'+
       '<div class="card-head"><div class="card-title"><span class="tag" data-t="'+esc(it.tag)+'"><i></i>'+esc(it.tag)+'</span>'+esc(it.title)+'</div>'+
       (canEdit()?'<div class="tools"><button class="icon-btn" data-act="edit" data-id="'+it.id+'">수정</button><button class="icon-btn danger" data-act="ask-del" data-id="'+it.id+'">삭제</button></div>':'')+'</div>'+
       (it.note?'<div class="card-note">'+esc(it.note)+'</div>':'')+conf+footHTML(it.id,it)+'</article></div>';
@@ -387,7 +524,7 @@ a{color:var(--accent)}
     h+='<div class="modebar"><span class="pill"><span class="dot'+(canEdit()?' on':'')+'"></span>'+(canEdit()?"편집 모드":"보기 모드")+'</span>'+
       (canEdit()?'<button class="chip-btn" data-act="logout">편집 모드 끄기</button>':(ui.panel?'':'<button class="chip-btn" data-act="panel">편집하기</button>'))+'</div>'+panelHTML();
     h+=checklistHTML();
-    h+='<figure class="mapcard" style="margin:0"><a href="map.png" target="_blank" rel="noopener"><img src="map.png" alt="대련 시내 지도: 공항, 서안로 야시장, 러시아거리, 파빌리온, 중산광장, 동방수성, 연화산 전망대, 성해광장 위치" width="800" height="625"></a><figcaption>대련 한눈에 보기 <span>누르면 크게 보여요</span></figcaption></figure>';
+    h+=mapSectionHTML();
     if(errMsg)h+='<p class="status err">'+esc(errMsg)+'</p>';
     h+='<section class="cover"><p class="print-only book-label">TRAVEL LOG · 대련 여행 수첩</p>'+'<header class="pass"><div class="pass-top"><span class="eyebrow"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>TRAVEL LOG</span><span class="legend">'+TAGS.map(function(t){return '<span data-t="'+t+'"><i></i>'+t+'</span>';}).join("")+'</span></span><h1>'+esc(t.title)+'</h1><span class="pass-sub">'+esc(t.sub)+'</span></div>'+
       '<div class="legs">'+state.flights.map(function(f,i){return '<div class="leg"><span class="code">'+(i?"오는편":"가는편")+' · '+esc(f.code)+'</span><span class="route">'+esc(f.route)+'</span><span class="when">'+esc(f.when)+'</span>'+(f.delay?'<span class="delay">'+esc(f.delay)+'</span>':'')+'</div>';}).join("")+'</div>'+
@@ -407,11 +544,11 @@ a{color:var(--accent)}
     if(dirty&&canEdit())h+='<div class="savebar" role="status"><div class="savebar-box'+(saveErr?' bad':'')+'">'+(saveErr?'<span class="save-err">'+esc(saveErr)+'</span>':'<span>저장하지 않은 변경사항이 있어요</span>')+'<button class="btn ghost" data-act="discard">되돌리기</button><button class="btn" data-act="save"'+(saving?" disabled":"")+'>'+(saving?"저장 중…":"저장")+'</button></div></div>';
     if(toast&&!dirty)h+='<div class="savebar" role="status"><div class="savebar-box ok"><span>'+esc(toast)+'</span></div></div>';
     h+='<input type="file" id="photo-input" accept="image/*" multiple hidden>';
-    var keepY=window.scrollY;$app.innerHTML=h;if(Math.abs(window.scrollY-keepY)>2)window.scrollTo(0,keepY); /* 다시 그려도 보던 위치 유지 */
+    var keepY=window.scrollY;$app.innerHTML=h;mountMap();if(Math.abs(window.scrollY-keepY)>2)window.scrollTo(0,keepY); /* 다시 그려도 보던 위치 유지 */
     var vEl=document.getElementById("ver");if(vEl)vEl.textContent="버전 10.26-3";
   }
   function focusFirst(){
-    var el=$app.querySelector('form[data-form="stop"] input,form[data-form="link"] input,form[data-form="photo-url"] input,form[data-form="token"] input');
+    var el=$app.querySelector('form[data-form="stop"] input,form[data-form="link"] input,form[data-form="photo-url"] input,form[data-form="token"] input,form[data-form="loc-search"] input');
     if(!el)return;el.focus({preventScroll:true});
     var f=el.closest("form");if(f)f.scrollIntoView({block:"nearest"});
   }
@@ -421,12 +558,12 @@ a{color:var(--accent)}
   $app.addEventListener("click",function(e){
     var b=e.target.closest("[data-act]");if(!b)return;
     var a=b.dataset.act,id=b.dataset.id;
-    if(!canEdit()&&/^add-(link|map|photo)$/.test(a)){ui={edit:null,confirm:null,addLink:null,panel:true};msg="";errMsg="추가하려면 먼저 편집 모드를 켜 주세요.";render();scrollTo({top:0,behavior:"smooth"});var t=document.getElementById("tok");if(t)t.focus({preventScroll:true});return;}
+    if(!canEdit()&&/^(add-(link|map|photo|loc)|loc-tap)$/.test(a)){ui={edit:null,confirm:null,addLink:null,panel:true};msg="";errMsg="추가하려면 먼저 편집 모드를 켜 주세요.";render();scrollTo({top:0,behavior:"smooth"});var t=document.getElementById("tok");if(t)t.focus({preventScroll:true});return;}
     if(a==="panel"){ui.panel=true;render();focusFirst();}
     else if(a==="logout"){try{localStorage.removeItem(TK);}catch(err){}token=null;sha=null;errMsg="";msg="편집 모드를 껐어요.";render();}
     else if(a==="edit"){ui={edit:id,confirm:null,addLink:null};render();focusFirst();}
     else if(a==="new"){ui={edit:"new-"+id,confirm:null,addLink:null};render();focusFirst();}
-    else if(a==="cancel"){e.preventDefault();ui={edit:null,confirm:null,addLink:null,panel:false};render();}
+    else if(a==="cancel"){e.preventDefault();ui={edit:null,confirm:null,addLink:null,panel:false,mapDay:ui.mapDay};render();}
     else if(a==="ask-del"){ui={edit:null,confirm:id,addLink:null};render();}
     else if(a==="del-stop"){state.days.forEach(function(d){d.items=d.items.filter(function(x){return x.id!==id;});});ui.confirm=null;markDirty();}
     else if(a==="add-link"||a==="add-map"){ui={edit:null,confirm:null,addLink:id,linkKind:a==="add-map"?"map":"web"};render();focusFirst();}
@@ -435,6 +572,13 @@ a{color:var(--accent)}
     else if(a==="add-photo"){ui={edit:null,confirm:null,addLink:null,addPhoto:id};render();focusFirst();}
     else if(a==="pick-photo"){photoOwner=id;document.getElementById("photo-input").click();}
     else if(a==="print")doPrint();
+    else if(a==="map-day"){ui.mapDay=id;render();}
+    else if(a==="add-loc"){ui={edit:null,confirm:null,addLink:null,addLoc:id,mapDay:ui.mapDay};render();focusFirst();}
+    else if(a==="show-loc"){focusMarker(id,true);}
+    else if(a==="loc-pick"){var rr=searchRes[id].items[+b.dataset.i];target(id).loc={lat:rr.lat,lng:rr.lng};delete searchRes[id];ui.addLoc=null;msg="위치를 넣었어요. '저장'을 눌러야 남아요.";markDirty();focusMarker(id,false);}
+    else if(a==="loc-clear"){delete target(id).loc;ui.addLoc=null;markDirty();}
+    else if(a==="loc-tap"){tapFor=id;ui.addLoc=null;render();var sec=document.getElementById("map-sec");if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"});}
+    else if(a==="tap-cancel"){tapFor=null;render();}
     else if(a==="ck-del"){state.checklist=state.checklist.filter(function(c){return c.id!==id;});markDirty();}
     else if(a==="save")save();
     else if(a==="discard"){state=clone(saved);dirty=false;clearDraft();render();}
@@ -446,6 +590,12 @@ a{color:var(--accent)}
     if(f.dataset.form==="token"){
       var tk=(fd.get("tok")||"").trim();if(!tk)return;
       verifyToken(tk);return;
+    }
+    if(f.dataset.form==="loc-search"){
+      var q=(fd.get("q")||"").trim();if(!q)return;
+      var c=parseCoords(q);
+      if(c){target(id).loc=c;delete searchRes[id];ui.addLoc=null;msg="좌표로 위치를 넣었어요. '저장'을 눌러야 남아요.";markDirty();focusMarker(id,false);return;}
+      searchPlace(id,q);return;
     }
     if(f.dataset.form==="ck-add"){var tx=(fd.get("text")||"").trim();if(!tx)return;state.checklist.push({id:uid(),text:tx,done:false});markDirty();var ni=document.getElementById("ck-new");if(ni)ni.focus();return;}
     if(f.dataset.form==="stop"){

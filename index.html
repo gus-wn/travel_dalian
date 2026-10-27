@@ -247,6 +247,7 @@ a{color:var(--accent)}
 .loc-pick:hover{border-color:var(--sub)}
 .loc-pick small{color:var(--sub);font-size:12px}
 @media print{.mapbox{order:-1;break-after:page;border:0;padding:0}.map-filter,.map-note,.map-foot,.leaflet-control-container{display:none!important}#map{height:150mm}}
+.loc-warn{font-size:12.5px;color:#b0625c;background:var(--grid);border-radius:6px;padding:4px 8px}
 </style>
 </head>
 <body>
@@ -325,13 +326,60 @@ a{color:var(--accent)}
     if(!data){try{var r2=await fetch(FILE+"?t="+Date.now(),{cache:"no-store"});if(r2.ok)data=await r2.json();}catch(e){}}
     if(!data)data=JSON.parse(document.getElementById("fallback").textContent);
     saved=data;state=clone(saved);
+    loadStatus();
     try{var d=localStorage.getItem(LS);if(d){var p=JSON.parse(d);
       if(p&&p.state&&JSON.stringify(p.state)!==JSON.stringify(saved)){
         if(p.base!==JSON.stringify(saved))mergeNew(p.state,saved); /* 저장 못 한 수정본 + 그사이 새로 생긴 링크·사진 */
         state=p.state;dirty=true;msg="저장하지 못했던 수정 내용을 다시 불러왔어요. 아래 '저장'을 눌러 주세요.";}}}catch(e){}
     render();
   }
+  /* ── 고덕 링크 → 위치 자동 찾기 (GitHub가 대신 링크를 열어 좌표를 찾음) ── */
+  var amapStatus=null,pollTimer=null,pollLeft=0;
+  async function loadStatus(){
+    try{var t=null;
+      if(token){var r=await gh("amap-status.json");if(r.ok)t=b64dec((await r.json()).content);}
+      else{var r2=await fetch("amap-status.json?t="+Date.now(),{cache:"no-store"});if(r2.ok)t=await r2.text();}
+      amapStatus=t?JSON.parse(t):null;render();
+    }catch(e){}
+  }
+  function firstMapLink(it){var l=(it.links||[]).filter(function(x){return isMap(x);})[0];return l?l.url:null;}
+  function unresolvedFor(it){
+    if(!amapStatus||!amapStatus.unresolved)return null;var u=firstMapLink(it);
+    return amapStatus.unresolved.filter(function(x){return x.id===it.id&&x.url===u;})[0]||null;
+  }
+  function needsResolve(st){
+    var n=0;st.days.forEach(function(d){d.items.forEach(function(it){var u=firstMapLink(it);if(!u)return;
+      if(it.loc&&!it.loc.src)return; if(it.loc&&it.loc.from===u)return; if(unresolvedFor(it))return; n++;});});return n;
+  }
+  function coordsFromUrl(u){
+    var t;try{t=decodeURIComponent(decodeURIComponent(u));}catch(e){t=u;}
+    var m=t.match(/[?&#]p=[^,&]*,(\d{2}\.\d+),(\d{3}\.\d+)/);if(m)return ok(+m[1],+m[2]);
+    m=t.match(/(?:position|location|lnglat|center|dest|to)=(\d{3}\.\d+),(\d{2}\.\d+)/);if(m)return ok(+m[2],+m[1]);
+    m=t.match(/[?&]q=(\d{2}\.\d+),(\d{3}\.\d+)/);if(m)return ok(+m[1],+m[2]);
+    return null;
+    function ok(lat,lng){return (lat>38.5&&lat<39.8&&lng>120.8&&lng<122.8)?{lat:+lat.toFixed(6),lng:+lng.toFixed(6)}:null;}
+  }
+  function adoptAutoLocs(dst,src){ /* 그사이 GitHub가 찾아 둔 위치를 내 수정본에도 넣기 */
+    var map={};src.days.forEach(function(d){d.items.forEach(function(it){map[it.id]=it;});});
+    dst.days.forEach(function(d){d.items.forEach(function(it){var r=map[it.id];
+      if(r&&r.loc&&r.loc.src==="amap"&&(!it.loc||it.loc.src==="amap")&&r.loc.from===firstMapLink(it))it.loc=r.loc;});});
+  }
+  function startPoll(){
+    if(!token)return;clearInterval(pollTimer);pollLeft=10;
+    pollTimer=setInterval(async function(){
+      if(--pollLeft<0||dirty){clearInterval(pollTimer);if(pollLeft<0){msg="고덕 링크 위치 찾기가 늦어지고 있어요. 잠시 뒤 새로고침해 주세요.";render();}return;}
+      try{var r=await gh(FILE);if(!r.ok)return;var j=await r.json();if(j.sha===sha)return;
+        var remote=JSON.parse(b64dec(j.content));if(dirty)return;
+        saved=remote;state=clone(remote);sha=j.sha;await loadStatus();
+        if(!needsResolve(state)){clearInterval(pollTimer);
+          var bad=amapStatus&&amapStatus.unresolved?amapStatus.unresolved.length:0;
+          msg="";toast="고덕 링크에서 위치를 찾아 지도에 핀을 찍었어요!"+(bad?" (못 찾은 곳 "+bad+"곳은 카드에 표시)":"");setTimeout(function(){toast="";render();},6000);}
+        render();
+      }catch(e){}
+    },15000);
+  }
   function mergeNew(dst,src){
+    adoptAutoLocs(dst,src);
     if(src.checklist){dst.checklist=dst.checklist||[];src.checklist.forEach(function(c){if(!dst.checklist.some(function(x){return x.id===c.id;}))dst.checklist.push(c);});}
     var map={};dst.days.forEach(function(d){d.items.forEach(function(it){map[it.id]=it;});});map.refs=dst.refs;
     var all=[["refs",src.refs]];src.days.forEach(function(d){d.items.forEach(function(it){all.push([it.id,it]);});});
@@ -480,6 +528,10 @@ a{color:var(--accent)}
     render();
   }
 
+  function locNote(it){
+    if(it.loc)return "";var u=unresolvedFor(it);
+    return u?'<div class="loc-warn">고덕 링크에서 위치를 못 찾았어요. '+esc(u.reason)+'</div>':"";
+  }
   function checklistHTML(){
     var L=state.checklist||(state.checklist=[]),done=L.filter(function(c){return c.done;}).length;
     var h='<section class="checklist" id="check"><div class="ck-head"><h2>꼭 챙길 것</h2><span class="ck-count">'+done+' / '+L.length+'</span></div>'+
@@ -505,7 +557,7 @@ a{color:var(--accent)}
     return '<div class="stop" id="card-'+it.id+'" data-t="'+esc(it.tag)+'"><div class="stop-time">'+esc(it.time)+'</div><article class="card">'+
       '<div class="card-head"><div class="card-title"><span class="tag" data-t="'+esc(it.tag)+'"><i></i>'+esc(it.tag)+'</span>'+esc(it.title)+'</div>'+
       (canEdit()?'<div class="tools"><button class="icon-btn" data-act="edit" data-id="'+it.id+'">수정</button><button class="icon-btn danger" data-act="ask-del" data-id="'+it.id+'">삭제</button></div>':'')+'</div>'+
-      (it.note?'<div class="card-note">'+esc(it.note)+'</div>':'')+conf+footHTML(it.id,it)+'</article></div>';
+      (it.note?'<div class="card-note">'+esc(it.note)+'</div>':'')+locNote(it)+conf+footHTML(it.id,it)+'</article></div>';
   }
   function panelHTML(){
     if(canEdit())return "";
@@ -608,7 +660,11 @@ a{color:var(--accent)}
       var raw=(fd.get("url")||"").trim(),m=raw.match(/https?:\/\/[^\s，。]+/),url=safeUrl(m?m[0]:raw);
       if(!url){msg="링크는 https:// 로 시작하는 주소를 넣어 주세요.";render();return;}
       var ln={url:url,label:(fd.get("label")||"").trim()};if(f.dataset.kind==="map")ln.kind="map";
-      target(id).links.push(ln);ui.addLink=null;msg="";markDirty();
+      target(id).links.push(ln);ui.addLink=null;msg="";
+      if(id!=="refs"&&isMap(ln)){var tg=target(id),cc=coordsFromUrl(url);
+        if(cc&&(!tg.loc||tg.loc.src==="amap")){tg.loc={lat:cc.lat,lng:cc.lng,src:"amap",from:url};msg="링크에 좌표가 있어서 바로 지도에 찍었어요.";}
+        else if(!tg.loc)msg="저장하면 GitHub가 이 고덕 링크에서 위치를 찾아 지도에 핀을 찍어요.";}
+      markDirty();
     }else if(f.dataset.form==="photo-url"){
       var pr=(fd.get("url")||"").trim(),pm=pr.match(/https?:\/\/\S+/),pu=safeUrl(pm?pm[0]:pr);
       if(!pu){msg="사진 주소는 https:// 로 시작해야 해요.";render();return;}
@@ -684,10 +740,12 @@ a{color:var(--accent)}
     saveErr="";
     try{
       for(var attempt=0;attempt<2;attempt++){
-        if(!sha||attempt>0){var g=await gh(FILE);if(g.ok)sha=(await g.json()).sha;}
+        if(!sha||attempt>0){var g=await gh(FILE);if(g.ok){var gj=await g.json();sha=gj.sha;try{adoptAutoLocs(state,JSON.parse(b64dec(gj.content)));}catch(e){}}}
         var body={message:"일정 수정",content:b64enc(JSON.stringify(state,null,1)),branch:BRANCH};if(sha)body.sha=sha;
         var r=await gh(FILE,{method:"PUT",body:JSON.stringify(body)});
-        if(r.ok){var j=await r.json();sha=j.content.sha;saved=clone(state);dirty=false;clearDraft();msg="";toast="저장했어요! 다른 기기에는 1~2분 뒤에 보여요.";setTimeout(function(){toast="";render();},4000);break;}
+        if(r.ok){var j=await r.json();sha=j.content.sha;saved=clone(state);dirty=false;clearDraft();msg="";toast="저장했어요! 다른 기기에는 1~2분 뒤에 보여요.";setTimeout(function(){toast="";render();},4000);
+          if(needsResolve(state)){msg="고덕 링크에서 위치를 찾는 중이에요… 1~2분 걸려요. 이 화면을 그대로 두면 핀이 자동으로 생겨요.";startPoll();}
+          break;}
         if((r.status===409||r.status===422)&&attempt===0)continue;
         var gm=await ghMsg(r);
         saveErr=r.status===401?"저장 키가 올바르지 않거나 만료됐어요. 위의 '편집 모드 끄기'를 누르고 키를 다시 넣어 주세요.":

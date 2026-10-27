@@ -1,0 +1,37 @@
+name: 고덕 링크 위치 찾기
+
+on:
+  push:
+    branches: [main]
+    paths: [data.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: amap-locations
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 고덕 링크에서 좌표 찾기
+        env:
+          AMAP_KEY: ${{ secrets.AMAP_KEY }}
+        run: python3 scripts/resolve_amap.py
+
+      - name: 바뀐 내용 저장
+        run: |
+          git config user.name "travel-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json amap-status.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "바뀐 것 없음"; exit 0; fi
+          git commit -m "고덕 링크 위치 자동 추가"
+          for i in 1 2 3; do
+            git push && exit 0
+            git pull --rebase || { git rebase --abort; echo "그사이 페이지에서 저장됨 → 다음 저장 때 다시 찾아요"; exit 0; }
+          done

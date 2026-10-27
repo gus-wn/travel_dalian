@@ -304,9 +304,15 @@
      "id": "c2",
      "time": "12:00",
      "tag": "식사",
-     "title": "점심 + 카페",
+     "title": "신흥전승오리구이",
      "note": "호텔·중산광장 근처에서 느긋하게",
-     "links": [],
+     "links": [
+      {
+       "url": "https://www.amap.com/ssr/place/B0FFFFYQYK",
+       "label": "",
+       "kind": "map"
+      }
+     ],
      "photos": []
     },
     {

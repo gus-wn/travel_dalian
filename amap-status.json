@@ -1,16 +1,12 @@
 {
- "updated": "2026-10-27T15:30:22+09:00",
- "found": [
-  "노보텔 대련 중산 체크인",
-  "파빌리온(柏威年) 구경",
-  "성해광장 야경"
- ],
+ "updated": "2026-10-27T15:32:29+09:00",
+ "found": [],
  "unresolved": [
   {
    "id": "a8",
    "title": "밍지카오위 鸣记脆皮烤鱼(柏威年店)",
-   "url": "https://uri.amap.com/search?keyword=%E9%B8%A3%E8%AE%B0%E8%84%86%E7%9A%AE%E7%83%A4%E9%B1%BC&city=%E5%A4%A7%E8%BF%9E",
-   "reason": "검색 링크라 정확한 위치가 없어요. 고덕 앱에서 가게를 연 뒤 '공유'로 받은 링크를 넣어 주세요."
+   "url": "https://www.amap.com/ssr/place/B0FFI6JOQI",
+   "reason": "링크 안에서 좌표를 찾지 못했어요. 지도에서 직접 찍어 주세요."
   },
   {
    "id": "a5",

@@ -29,19 +29,9 @@
      "time": "11:40",
      "tag": "이동",
      "title": "대련 저우수이쯔 공항 도착",
-     "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분\n11/20 11:20 → 11:40",
-     "links": [
-      {
-       "url": "https://blog.naver.com/risona83/224347707174",
-       "label": "무료셔틀예약"
-      }
-     ],
-     "photos": [
-      {
-       "url": "https://postfiles.pstatic.net/MjAyNjA3MTVfMjYz/MDAxNzg0MTA0ODgyODMx.3L3qZmTD7AwysplG2oTFzBG1GYpDkF3ETa8NnGbWfPcg.IFW_5cqAL8shu_FnX8C9IacAPPvso6eUDSroLogJ2v0g.JPEG/SE-9bfd43a8-1639-43a3-bf41-0c64a80e2173.jpg?type=w966",
-       "cap": ""
-      }
-     ]
+     "note": "CZ686. 입국 후 택시로 호텔까지 약 15~20분",
+     "links": [],
+     "photos": []
     },
     {
      "id": "a2",
@@ -67,8 +57,8 @@
      "id": "a4",
      "time": "13:30",
      "tag": "쇼핑",
-     "title": "파빌리온(柏威年, pavilion)",
-     "note": "팝마트, 모어요거트, 루이싱커피 등\n* 여기 화장실깔꼼\n\n[지하 1층] 몰리티,모어요거트 \n[1층] 몰리랜드\n[4층] 오락실",
+     "title": "파빌리온(柏威年) 구경",
+     "note": "팝마트·지하 마트 구경. 배고프면 길게 말고 가볍게 둘러보기",
      "links": [
       {
        "url": "https://surl.amap.com/dSkyUDP1u9cz",
@@ -88,11 +78,11 @@
      "time": "14:30",
      "tag": "식사",
      "title": "밍지카오위 鸣记脆皮烤鱼(柏威年店)",
-     "note": "파빌리온 5층",
+     "note": "중국 다롄시 중산구 파빌리온(柏威年) 쇼핑몰 5층 L5019호\n매콤한 마라맛 / 약간 매콤한 마늘맛 (반반 메뉴인 '일어쌍미' 추천)",
      "links": [
       {
        "url": "https://uri.amap.com/search?keyword=%E9%B8%A3%E8%AE%B0%E8%84%86%E7%9A%AE%E7%83%A4%E9%B1%BC&city=%E5%A4%A7%E8%BF%9E",
-       "label": "밍지카오위 파빌리온",
+       "label": "밍지카오위",
        "kind": "map"
       },
       {
@@ -108,35 +98,11 @@
      ]
     },
     {
-     "id": "esaz1mi",
-     "time": "15:30",
-     "tag": "쇼핑",
-     "title": "과일 쇼핑",
-     "note": "여기 과일이 진짜 너무 맛있음.... 유경험자임",
-     "links": [
-      {
-       "url": "https://surl.amap.com/eIB4Gixf9wZ",
-       "label": "과일시장",
-       "kind": "map"
-      }
-     ],
-     "photos": [
-      {
-       "url": "https://postfiles.pstatic.net/MjAyNTA4MzBfNTYg/MDAxNzU2NTUzNjg0NTgx.DGdTtnzqdVNBK9z8RyV8zOHpPP9ETTnPurJ8zGqk4kAg.VgxrVY7sauf4C9gqN4lo_sM2AFEfkIubW0fnnIEQQ5cg.JPEG/IMG%EF%BC%BF8330.jpg?type=w773",
-       "cap": ""
-      },
-      {
-       "url": "https://postfiles.pstatic.net/MjAyNTA4MzBfODEg/MDAxNzU2NTUzNjg1OTc3.k54JSWmMblPfEEY0f0FReknwIdWyINpLqTq7sg1_SoEg.7lRg3GZ2CiGYqHu5QPR-4ZRJTbVwOXc50dARvRgagc0g.JPEG/IMG%EF%BC%BF8331.jpg?type=w773",
-       "cap": ""
-      }
-     ]
-    },
-    {
      "id": "a5",
      "time": "16:30",
      "tag": "마사지",
-     "title": "마사지 - 양쯔족도/ 良子足道(民主广场店)",
-     "note": "호텔 근처로 돌아와서 마사지\n11:00-24:00 (지점별 변동 가능)\n辽宁省大连市中山区明泽街15号",
+     "title": "마사지 ①",
+     "note": "밍지카오위 먹고 호텔 근처로 돌아와서 전신 or 발마사지 90분. 다중뎬에서 足疗 / 按摩 검색",
      "links": [
       {
        "url": "https://www.amap.com/ssr/place/B0FFIG35WX",
@@ -163,8 +129,8 @@
      "id": "a3",
      "time": "19:00",
      "tag": "식사",
-     "title": "시딩(喜鼎, XI DING) 동방수성점",
-     "note": "성게만두 필수 *\n매일 11:00 ~ 21:00\nLiaoningDalianZhongshanHaizhiyun Road No.49 Dongfang Business Unit Block B31 Northwest Gate\n- 성게만두, 크림새우, 새우죽, 소갈비찜 (가격좀 있음)",
+     "title": "시딩(喜鼎) 동방수성점 저녁",
+     "note": "성게만두 필수. 호텔에서 택시 약 10분. 저녁 시간엔 웨이팅이 있을 수 있어요",
      "links": [
       {
        "url": "https://m.blog.naver.com/gobyway/224281949587",
@@ -204,15 +170,6 @@
      "note": "호텔에서 걸어서 3분, 조명 켜진 유럽풍 건물",
      "links": [],
      "photos": []
-    },
-    {
-     "id": "powcfww",
-     "time": "22:00",
-     "tag": "야경",
-     "title": "Supermiami Live Club",
-     "note": "",
-     "links": [],
-     "photos": []
     }
    ]
   },
@@ -225,8 +182,8 @@
      "id": "b1",
      "time": "오전",
      "tag": "휴식",
-     "title": "헤드스파(FAVIS By ReMINGLE)",
-     "note": "2만원대 60분\n10:00~21:00\n타임스퀘어 2층\n大连时代广场二层 L253 商铺",
+     "title": "늦잠 + 호텔 조식",
+     "note": "첫날 이동이 많았으니 여유 있게",
      "links": [],
      "photos": [
       {
@@ -240,7 +197,7 @@
      "time": "11:00",
      "tag": "휴식",
      "title": "동관지에(东关街) · 대련의 성수",
-     "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기.",
+     "note": "오케이베이글 브런치, 블랜버니 등 카페에서 오래 앉아 있기. 700cc 옆 통로 포토스팟",
      "links": [],
      "photos": [
       {
@@ -304,15 +261,6 @@
      "note": "",
      "links": [],
      "photos": []
-    },
-    {
-     "id": "0r5wxez",
-     "time": "",
-     "tag": "휴식",
-     "title": "대련 지엔빙 시켜먹기",
-     "note": "",
-     "links": [],
-     "photos": []
     }
    ]
   },
@@ -334,7 +282,7 @@
      "id": "c2",
      "time": "12:00",
      "tag": "식사",
-     "title": "신흥전승오리구이",
+     "title": "점심 + 카페",
      "note": "호텔·중산광장 근처에서 느긋하게",
      "links": [],
      "photos": []

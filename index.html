@@ -248,6 +248,16 @@ a{color:var(--accent)}
 .loc-pick small{color:var(--sub);font-size:12px}
 @media print{.mapbox{order:-1;break-after:page;border:0;padding:0}.map-filter,.map-note,.map-foot,.leaflet-control-container{display:none!important}#map{height:150mm}}
 .loc-warn{font-size:12.5px;color:#b0625c;background:var(--grid);border-radius:6px;padding:4px 8px}
+.pin-wrap{width:0!important;height:0!important}
+.pin{position:absolute;left:0;top:0;transform:translate(-50%,calc(-100% - 7px));display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+  background:#fff;color:#3b3b3b;border:1px solid #d3d6da;border-radius:999px;padding:2px 9px 2px 6px;font-family:var(--hand);font-size:13px;line-height:1.4;box-shadow:0 2px 6px rgba(0,0,0,.18);width:auto;height:auto}
+.pin i{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.pin::after{content:"";position:absolute;left:50%;bottom:-7px;width:2px;height:7px;background:#8b9097;transform:translateX(-50%)}
+.pin::before{content:"";position:absolute;left:50%;bottom:-10px;width:6px;height:6px;border-radius:50%;background:#3b3b3b;transform:translateX(-50%)}
+.loc-wait{font-size:12.5px;color:var(--text);background:var(--grid);border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:7px}
+.spin{width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--sub);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
 </style>
 </head>
 <body>
@@ -334,7 +344,7 @@ a{color:var(--accent)}
     render();
   }
   /* ── 고덕 링크 → 위치 자동 찾기 (GitHub가 대신 링크를 열어 좌표를 찾음) ── */
-  var amapStatus=null,pollTimer=null,pollLeft=0;
+  var amapStatus=null,pollTimer=null,pollLeft=0,waitIds=[];
   async function loadStatus(){
     try{var t=null;
       if(token){var r=await gh("amap-status.json");if(r.ok)t=b64dec((await r.json()).content);}
@@ -365,18 +375,20 @@ a{color:var(--accent)}
       if(r&&r.loc&&r.loc.src==="amap"&&(!it.loc||it.loc.src==="amap")&&r.loc.from===firstMapLink(it))it.loc=r.loc;});});
   }
   function startPoll(){
-    if(!token)return;clearInterval(pollTimer);pollLeft=10;
+    if(!token)return;clearInterval(pollTimer);pollLeft=18;
     pollTimer=setInterval(async function(){
       if(--pollLeft<0||dirty){clearInterval(pollTimer);if(pollLeft<0){msg="고덕 링크 위치 찾기가 늦어지고 있어요. 잠시 뒤 새로고침해 주세요.";render();}return;}
       try{var r=await gh(FILE);if(!r.ok)return;var j=await r.json();if(j.sha===sha)return;
         var remote=JSON.parse(b64dec(j.content));if(dirty)return;
         saved=remote;state=clone(remote);sha=j.sha;await loadStatus();
-        if(!needsResolve(state)){clearInterval(pollTimer);
+        var got=waitIds.filter(function(id){var f=findItem(id);return f&&f.it.loc;});
+        if(got.length){waitIds=waitIds.filter(function(id){return got.indexOf(id)<0;});setTimeout(function(){focusMarker(got[0],false);},50);}
+        if(!needsResolve(state)){clearInterval(pollTimer);waitIds=[];
           var bad=amapStatus&&amapStatus.unresolved?amapStatus.unresolved.length:0;
           msg="";toast="고덕 링크에서 위치를 찾아 지도에 핀을 찍었어요!"+(bad?" (못 찾은 곳 "+bad+"곳은 카드에 표시)":"");setTimeout(function(){toast="";render();},6000);}
         render();
       }catch(e){}
-    },15000);
+    },7000);
   }
   function mergeNew(dst,src){
     adoptAutoLocs(dst,src);
@@ -474,7 +486,7 @@ a{color:var(--accent)}
       if(pts.length>1)L.polyline(pts,{color:"#8b9097",weight:2,dashArray:"5 6",opacity:.9,interactive:false}).addTo(layer);});
     list.forEach(function(x){
       var col=getComputedStyle(document.documentElement).getPropertyValue(TAGCOLOR[x.it.tag]||"--line").trim()||"#ccc";
-      var icon=L.divIcon({className:"pin-wrap",html:'<span class="pin" style="background:'+col+'"><b>'+(x.di+1)+'-'+x.n+'</b></span>',iconSize:[34,22],iconAnchor:[17,11],popupAnchor:[0,-10]});
+      var icon=L.divIcon({className:"pin-wrap",html:'<span class="pin"><i style="background:'+col+'"></i>'+esc(pinLabel(x.it))+'</span>',iconSize:null,iconAnchor:[0,0],popupAnchor:[0,-30]});
       var m=L.marker([x.it.loc.lat,x.it.loc.lng],{icon:icon,title:x.it.title}).addTo(layer);
       m.bindPopup(popupHTML(x));markers[x.it.id]=m;});
     if(fit||changedFilter){
@@ -482,6 +494,10 @@ a{color:var(--accent)}
       else if(list.length>1)map.fitBounds(L.latLngBounds(list.map(function(x){return [x.it.loc.lat,x.it.loc.lng];})),{padding:[28,28],maxZoom:16});
       else map.setView(DALIAN,12);
     }
+  }
+  function pinLabel(it){
+    var l=(it.links||[]).filter(function(x){return isMap(x)&&x.label;})[0];
+    var t=(l?l.label:it.title).trim();return t.length>16?t.slice(0,15)+"…":t;
   }
   function amapLinkFor(it){
     var l=(it.links||[]).filter(function(l){return isMap(l);})[0];
@@ -529,6 +545,7 @@ a{color:var(--accent)}
   }
 
   function locNote(it){
+    if(waitIds.indexOf(it.id)>=0&&!it.loc)return '<div class="loc-wait"><span class="spin"></span>고덕 링크에서 위치 찾는 중… 보통 30초~1분이면 지도에 찍혀요</div>';
     if(it.loc)return "";var u=unresolvedFor(it);
     return u?'<div class="loc-warn">고덕 링크에서 위치를 못 찾았어요. '+esc(u.reason)+'</div>':"";
   }
@@ -663,7 +680,7 @@ a{color:var(--accent)}
       target(id).links.push(ln);ui.addLink=null;msg="";
       if(id!=="refs"&&isMap(ln)){var tg=target(id),cc=coordsFromUrl(url);
         if(cc&&(!tg.loc||tg.loc.src==="amap")){tg.loc={lat:cc.lat,lng:cc.lng,src:"amap",from:url};msg="링크에 좌표가 있어서 바로 지도에 찍었어요.";}
-        else if(!tg.loc)msg="저장하면 GitHub가 이 고덕 링크에서 위치를 찾아 지도에 핀을 찍어요.";}
+        else if(!tg.loc||tg.loc.src==="amap"){waitIds.push(id);markDirty();msg="";save();return;}}
       markDirty();
     }else if(f.dataset.form==="photo-url"){
       var pr=(fd.get("url")||"").trim(),pm=pr.match(/https?:\/\/\S+/),pu=safeUrl(pm?pm[0]:pr);
@@ -744,7 +761,7 @@ a{color:var(--accent)}
         var body={message:"일정 수정",content:b64enc(JSON.stringify(state,null,1)),branch:BRANCH};if(sha)body.sha=sha;
         var r=await gh(FILE,{method:"PUT",body:JSON.stringify(body)});
         if(r.ok){var j=await r.json();sha=j.content.sha;saved=clone(state);dirty=false;clearDraft();msg="";toast="저장했어요! 다른 기기에는 1~2분 뒤에 보여요.";setTimeout(function(){toast="";render();},4000);
-          if(needsResolve(state)){msg="고덕 링크에서 위치를 찾는 중이에요… 1~2분 걸려요. 이 화면을 그대로 두면 핀이 자동으로 생겨요.";startPoll();}
+          if(needsResolve(state)){if(!waitIds.length)msg="고덕 링크에서 위치를 찾는 중이에요… 이 화면을 그대로 두면 핀이 자동으로 생겨요.";startPoll();}
           break;}
         if((r.status===409||r.status===422)&&attempt===0)continue;
         var gm=await ghMsg(r);

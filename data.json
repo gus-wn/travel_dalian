@@ -229,8 +229,8 @@
      "id": "b1",
      "time": "오전",
      "tag": "휴식",
-     "title": "늦잠 + 호텔 조식",
-     "note": "첫날 이동이 많았으니 여유 있게",
+     "title": "헤드스파",
+     "note": "첫날 이동이 많았으니 여유 있게\n오픈시간 10:00~21:00",
      "links": [
       {
        "url": "https://surl.amap.com/eJOScCe1z0Ub",
@@ -349,13 +349,7 @@
      "tag": "식사",
      "title": "신흥전승오리구이",
      "note": "호텔·중산광장 근처에서 느긋하게",
-     "links": [
-      {
-       "url": "https://www.amap.com/ssr/place/B0FFFFYQYK",
-       "label": "신흥전승오리구이",
-       "kind": "map"
-      }
-     ],
+     "links": [],
      "photos": []
     },
     {
@@ -460,6 +454,11 @@
   {
    "id": "5g1hip5",
    "text": "샤워필터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+   "done": false
+  },
+  {
+   "id": "f6d32ra",
+   "text": "https://blog.naver.com/chuchuvly/224429123128",
    "done": false
   }
  ]

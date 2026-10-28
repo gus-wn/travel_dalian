@@ -226,6 +226,21 @@
    "date": "11/21 토",
    "items": [
     {
+     "id": "a4paheb",
+     "time": "06:00",
+     "tag": "휴식",
+     "title": "노보텔",
+     "note": "",
+     "links": [
+      {
+       "url": "https://surl.amap.com/eeTHCAeA7Gm",
+       "label": "노보텔",
+       "kind": "map"
+      }
+     ],
+     "photos": []
+    },
+    {
      "id": "b1",
      "time": "오전",
      "tag": "휴식",

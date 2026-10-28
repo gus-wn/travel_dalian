@@ -94,7 +94,7 @@
      "time": "14:00",
      "tag": "쇼핑",
      "title": "비요트 슈퍼마켓",
-     "note": "대표적인 슈퍼 3개\n1. 파빌리온 Ole(柏威年)\n2. 뉴마트(NewMart) 大连新玛特购物休闲广场(大连青泥洼桥店)\n3. 비요트 마트 比优特生活广场(嘉和·花样年华A座店)",
+     "note": "대표적인 슈퍼 3개\n1. 파빌리온 Ole(柏威年)\n2. 뉴마트(NewMart) 大连新玛特购物休闲广场(大连青泥洼桥店)\n3. 비요트 마트 比优特生活广场(嘉和·花样年华A座店)\n\n[구매리스트]\n1. 견과류 종류\n2. 새람쥐 마카다미아\n3. 대추 요거트",
      "links": [
       {
        "url": "https://surl.amap.com/7WA36Dkp2GK",
@@ -102,7 +102,24 @@
        "kind": "map"
       }
      ],
-     "photos": [],
+     "photos": [
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MjRfMjgx%2FMDAxNzUzMzI2NDE4ODc0.uaAgaWmesCaEL4CpKbZkLT933WOoaTSMj6EShllUed8g.Kw8QnI6tMkT-7XN5LZ7_x8Ouguj3FI5To5fguhRHq2Ig.JPEG%2F20250120%25A3%25DF110948.jpg&type=sc960_832",
+       "cap": ""
+      },
+      {
+       "url": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA2MTZfMzUg%2FMDAxNzgxNTkzODkwNTg2.60OXFrCGd6y2qKmPEtsC--ny5npZOgTZ7N1x8JsTTsog.6U_FIuqB6ZNm_9h5_pjM3YZFz1pAHAHsoNEicVFX2Vcg.JPEG%2FIMG%25A3%25DF3667.jpg&type=sc960_832",
+       "cap": ""
+      },
+      {
+       "path": "photos/1793186612188-er88adg.jpg",
+       "cap": "d1.png"
+      },
+      {
+       "path": "photos/1793186616975-p7uxb0v.jpg",
+       "cap": "d2.png"
+      }
+     ],
      "loc": {
       "lat": 38.91969,
       "lng": 121.654902,

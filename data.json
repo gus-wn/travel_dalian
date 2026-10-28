@@ -64,7 +64,7 @@
      "time": "13:30",
      "tag": "쇼핑",
      "title": "파빌리온(柏威年) 구경",
-     "note": "팝마트·지하 마트 구경. 배고프면 길게 말고 가볍게 둘러보기",
+     "note": "팝마트·지하 마트 구경. \n배고프면 길게 말고 가볍게 둘러보기\n\n- 지하 1층 : 모어요거트, 차파다, 루이싱커피, *ole마트*\n- 3층 : 팝마트, KKV(소품숍), 와우뷰티(WOW COLOUR)",
      "links": [
       {
        "url": "https://surl.amap.com/dSkyUDP1u9cz",
@@ -88,6 +88,15 @@
       "src": "amap",
       "from": "https://surl.amap.com/dSkyUDP1u9cz"
      }
+    },
+    {
+     "id": "cpmu258",
+     "time": "14:00",
+     "tag": "쇼핑",
+     "title": "슈퍼마켓 쇼핑",
+     "note": "1. 파빌리온 Ole\n2. 뉴마트(NewMart)\n3. 비요트 마트",
+     "links": [],
+     "photos": []
     },
     {
      "id": "a8",

@@ -243,7 +243,13 @@
        "url": "https://postfiles.pstatic.net/MjAyNjAzMDVfMTMg/MDAxNzcyNjk5MzUzOTIw.n1EU494m7ajCb85yAIq-1pRV3SNbRD7-XBwqnYTUZq0g.IfTAyNGMGmDe2McOykGZ2Qi2mODO8XF1CsBBBSGHclkg.JPEG/IMG%EF%BC%BF7178.jpg?type=w966",
        "cap": ""
       }
-     ]
+     ],
+     "loc": {
+      "lat": 38.924404,
+      "lng": 121.650337,
+      "src": "amap",
+      "from": "https://surl.amap.com/eJOScCe1z0Ub"
+     }
     },
     {
      "id": "b2",

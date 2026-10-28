@@ -1,14 +1,5 @@
 {
- "updated": "2026-10-28T20:34:40+09:00",
- "found": [
-  "늦잠 + 호텔 조식"
- ],
- "unresolved": [
-  {
-   "id": "c2",
-   "title": "신흥전승오리구이",
-   "url": "https://www.amap.com/ssr/place/B0FFFFYQYK",
-   "reason": "이 링크에는 좌표가 없어요. 고덕 앱에서 가게를 연 뒤 '공유 → 링크 복사'로 받은 링크를 넣어 주세요."
-  }
- ]
+ "updated": "2026-10-28T20:36:12+09:00",
+ "found": [],
+ "unresolved": []
 }

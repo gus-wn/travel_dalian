@@ -231,7 +231,13 @@
      "tag": "휴식",
      "title": "늦잠 + 호텔 조식",
      "note": "첫날 이동이 많았으니 여유 있게",
-     "links": [],
+     "links": [
+      {
+       "url": "https://surl.amap.com/eJOScCe1z0Ub",
+       "label": "FAVIS 헤드스파",
+       "kind": "map"
+      }
+     ],
      "photos": [
       {
        "url": "https://postfiles.pstatic.net/MjAyNjAzMDVfMTMg/MDAxNzcyNjk5MzUzOTIw.n1EU494m7ajCb85yAIq-1pRV3SNbRD7-XBwqnYTUZq0g.IfTAyNGMGmDe2McOykGZ2Qi2mODO8XF1CsBBBSGHclkg.JPEG/IMG%EF%BC%BF7178.jpg?type=w966",

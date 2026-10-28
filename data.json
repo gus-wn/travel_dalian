@@ -102,7 +102,13 @@
        "kind": "map"
       }
      ],
-     "photos": []
+     "photos": [],
+     "loc": {
+      "lat": 38.91969,
+      "lng": 121.654902,
+      "src": "amap",
+      "from": "https://surl.amap.com/7WA36Dkp2GK"
+     }
     },
     {
      "id": "a8",
